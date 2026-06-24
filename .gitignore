@@ -22,6 +22,5 @@ dist/
 # Plans
 docs/plans/
 
-# Internal evaluation materials
-docs/evaluation-prompt.md
-docs/follow-up-interview-outline.md
+# Local internal notes
+.internal/
