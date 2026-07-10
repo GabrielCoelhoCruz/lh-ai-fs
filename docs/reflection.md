@@ -29,4 +29,4 @@ Building the gold set *before* the pipeline was the highest-leverage decision. I
 
 ## Honest accounting
 
-Eval numbers reported in the README/`evals/results.json` are from real runs of `python run_evals.py` — nothing cherry-picked; the harness saves the raw reports it scored. Where the pipeline misses a gold flaw, the miss is visible in per-flaw credit. Time spent: research and gold-set construction consumed roughly as much as implementation, which was the point — the AI-heavy workflow shifts human effort from typing code to deciding what "correct" means and verifying it.
+Any eval numbers reported in `evals/results.json` come from real runs of `python run_evals.py` — nothing cherry-picked; the harness saves the raw reports it scored alongside the scores. Where the pipeline misses a gold flaw, the miss is visible in per-flaw credit. Time spent: research and gold-set construction consumed roughly as much as implementation, which was the point — the AI-heavy workflow shifts human effort from typing code to deciding what "correct" means and verifying it.
