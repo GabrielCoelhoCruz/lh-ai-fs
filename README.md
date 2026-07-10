@@ -47,6 +47,36 @@ npm run dev
 
 The UI runs at `http://localhost:5175`.
 
+## Solution Overview
+
+The pipeline is six named agents over typed Pydantic handoffs, driven by a deterministic Python orchestrator (`backend/orchestrator.py`) — LLMs make judgments inside stages, never control flow:
+
+| # | Agent | Role | Model tier |
+|---|---|---|---|
+| 1 | `CitationExtractor` | brief → structured citation inventory + uncited legal assertions | fast |
+| 2 | `CitationVerifier` | existence + does-it-support-the-proposition per authority, with a deterministic reporter-year sanity check | reasoning |
+| 3 | `QuoteChecker` | are direct quotes the authority's actual words? | reasoning |
+| 4 | `CrossDocChecker` | brief's factual claims vs. police report / medical records / witness statement, verbatim evidence quotes | reasoning |
+| 5 | `ConfidenceAdjudicator` | dedupe + 0–1 confidence with reasoning per finding | reasoning |
+| 6 | `JudicialMemoWriter` | one-paragraph bench memo from the verified findings | reasoning (low effort) |
+
+Every stage is recorded in the report with state and duration; a stage failure degrades the report instead of aborting it. Claims the pipeline cannot check are reported as **could not verify** — never guessed. `POST /analyze` returns the full structured `VerificationReport` (see `backend/schemas.py`).
+
+Models are configurable via env vars: `BSD_MODEL_FAST` (default `gpt-5.4-nano`) and `BSD_MODEL_REASONING` (default `gpt-5.6-terra`).
+
+### Running the evals
+
+```bash
+cd backend
+python run_evals.py            # one pipeline run, scored against evals/gold.json
+python run_evals.py --runs 3   # repeat runs to see variance
+python run_evals.py --report evals/report-run1.json   # re-score a saved report (no API cost)
+```
+
+The harness measures **recall** (of 12 known planted flaws, fractional credit for the six-case footnote), **precision** (findings that flag true statements count against it — the gold set includes explicit precision traps), and **hallucination rate** (mechanical check: every evidence quote must actually appear in the cited document). It also verifies the two deliberately uncheckable claims surface as *could-not-verify* rather than as findings or silence. Results and the full finding-to-gold mapping land in `backend/evals/results.json` so every score is auditable. Gold-set provenance: `docs/research/flaw-audit.md` reconciled with the web-verified citation dossier in `docs/research/caselaw-dossier.md`.
+
+Further reading: [production readiness plan](docs/production-readiness.md) · [reflection](docs/reflection.md) · [research notes](docs/research/).
+
 ## Challenge Structure
 
 This challenge is designed for foundational engineers at an early startup. We want to see whether you can ship a working AI prototype and also reason about the system it would need to become: reliable, scalable, inspectable, secure, and usable by real legal teams.
