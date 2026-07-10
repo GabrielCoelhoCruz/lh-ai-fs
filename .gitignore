@@ -24,3 +24,5 @@ docs/plans/
 
 # Local internal notes
 .internal/
+
+.omc/
