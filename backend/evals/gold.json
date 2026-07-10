@@ -1,0 +1,113 @@
+{
+  "description": "Ground-truth gold set for the Rivera v. Harmon MSJ. Provenance and evidence quotes: docs/research/flaw-audit.md (adversarial audit) reconciled with docs/research/caselaw-dossier.md (web-verified citations). 'categories' lists every finding category accepted as a correct detection. 'cnv_acceptable' means reporting the item as could-not-verify also counts as correct, because the pipeline has no legal database and honest uncertainty is preferred over a confident wrong label.",
+  "positives": [
+    {
+      "id": "F1",
+      "summary": "MSJ states the incident date as March 14, 2021 (three times); the police report, medical records, and witness statement all say March 12, 2021, and the March 13 surgery makes March 14 impossible.",
+      "categories": ["cross_document_contradiction"],
+      "cnv_acceptable": false,
+      "match_hints": ["March 14", "March 12", "incident date", "surgery March 13"]
+    },
+    {
+      "id": "F2",
+      "summary": "MSJ Undisputed Fact #4 claims Rivera was not wearing required PPE / fall-arrest equipment; police report and witness statement confirm hard hat and harness were worn and the harness anchor point was part of the section that collapsed.",
+      "categories": ["cross_document_contradiction"],
+      "cnv_acceptable": false,
+      "match_hints": ["PPE", "personal protective equipment", "harness", "fall-arrest", "hard hat", "anchor point"]
+    },
+    {
+      "id": "F3",
+      "summary": "MSJ claims Apex alone was responsible for scaffolding operations and safety, omitting that Harmon's own foreman (Donner) directed the crew onto the defective section, imposed schedule pressure, and dismissed a reported safety concern about the base plate — retained-control facts that undercut the Privette argument.",
+      "categories": ["cross_document_contradiction", "misleading_framing"],
+      "cnv_acceptable": false,
+      "match_hints": ["Donner", "retained control", "directed", "foreman", "safety concern", "base plate", "get it done", "Apex responsible"]
+    },
+    {
+      "id": "F4",
+      "summary": "MSJ touts an 'unblemished OSHA inspection record' insulating Harmon from liability, omitting the pending Cal/OSHA investigation, the documented pre-incident defects (rust, plywood base, worn couplings) reported to both Ellison and Donner, and the post-incident teardown/rebuild.",
+      "categories": ["misleading_framing", "cross_document_contradiction"],
+      "cnv_acceptable": false,
+      "match_hints": ["OSHA", "unblemished", "inspection record", "Cal/OSHA investigation", "rust", "plywood"]
+    },
+    {
+      "id": "F5",
+      "summary": "The quotation attributed to Privette ('A hirer is never liable ... Id. at 702') is doctored/fabricated: the sentence does not appear in the opinion and 'never' converts a rebuttable presumption into an absolute bar.",
+      "categories": ["doctored_quote", "mischaracterized_holding"],
+      "cnv_acceptable": false,
+      "match_hints": ["Privette", "never liable", "quote", "Id. at 702", "rebuttable presumption"],
+      "citation_names": ["Privette"]
+    },
+    {
+      "id": "F6",
+      "summary": "SeaBright Ins. Co. v. US Airways is real but cited for a proposition it does not support: it is a delegation-of-safety-duties holding, not a rule that statutory compliance is 'highly probative of due care'.",
+      "categories": ["mischaracterized_holding"],
+      "cnv_acceptable": false,
+      "match_hints": ["SeaBright", "Seabright", "delegation", "probative of due care"],
+      "citation_names": ["SeaBright", "Seabright"]
+    },
+    {
+      "id": "F7",
+      "summary": "Kellerman v. Pacific Coast Construction, 887 F.2d 1204 (9th Cir. 1991) does not exist, and the quoted rule (OSHA compliance creates a rebuttable presumption of due care) is not law anywhere; 887 F.2d also corresponds to ~1989, not 1991.",
+      "categories": ["fabricated_citation", "doctored_quote"],
+      "cnv_acceptable": true,
+      "match_hints": ["Kellerman", "887 F.2d", "OSHA presumption"],
+      "citation_names": ["Kellerman"]
+    },
+    {
+      "id": "F8",
+      "summary": "Whitmore v. Delgado Scaffolding Co., 334 F. Supp. 2d 1189 (C.D. Cal. 2004) does not exist.",
+      "categories": ["fabricated_citation"],
+      "cnv_acceptable": true,
+      "match_hints": ["Whitmore", "Delgado", "334 F. Supp"],
+      "citation_names": ["Whitmore", "Delgado"]
+    },
+    {
+      "id": "F9",
+      "summary": "Footnote 1's six-case string cite: none of the six cases exist (Torres, Blackwell, Dixon, Okafor, Nguyen, Reeves); Dixon (Tex.) and Okafor (Fla.) are additionally non-binding jurisdictions for a California motion. Scored fractionally: credit = flagged cases / 6.",
+      "categories": ["fabricated_citation"],
+      "cnv_acceptable": true,
+      "fractional": true,
+      "match_hints": ["footnote", "string cite"],
+      "citation_names": ["Torres", "Blackwell", "Dixon", "Okafor", "Nguyen", "Reeves"]
+    },
+    {
+      "id": "F10",
+      "summary": "'Over eight years of experience' — no document in the file states Rivera's tenure; asserted as established fact with no record support.",
+      "categories": ["unsupported_assertion"],
+      "cnv_acceptable": true,
+      "match_hints": ["eight years", "experience", "tenure"]
+    },
+    {
+      "id": "F11",
+      "summary": "The assumption-of-risk section advances and applies legal doctrine with zero cited authority (the only argument section with none), and the doctrine as framed (complete bar) misstates California law after Li v. Yellow Cab.",
+      "categories": ["unsupported_assertion", "misleading_framing", "mischaracterized_holding"],
+      "cnv_acceptable": false,
+      "match_hints": ["assumption of risk", "no citation", "without authority", "Section III.C"]
+    },
+    {
+      "id": "F12",
+      "summary": "Section III.D's heading asserts claims are 'Time-Barred' while its own body concedes the filing falls within the two-year window; the accrual-date reservation states no basis.",
+      "categories": ["misleading_framing", "cross_document_contradiction"],
+      "cnv_acceptable": false,
+      "match_hints": ["time-barred", "statute of limitations", "self-defeating", "within this window"]
+    }
+  ],
+  "negatives": [
+    { "id": "P1", "summary": "CCP 335.1 two-year statute of limitations is correctly stated law.", "match_hints": ["335.1", "two-year", "statute of limitations"] },
+    { "id": "P2", "summary": "The filing being (nominally) timely is true — 726/728 days against a 730-day limit.", "match_hints": ["timely", "within this window", "726", "728"] },
+    { "id": "P3", "summary": "The Privette citation itself (5 Cal.4th 689 (1993)) is real and correct — only the quote is defective. Labeling Privette fabricated is a false flag.", "match_hints": ["Privette fabricated", "Privette does not exist"] },
+    { "id": "P4", "summary": "The SeaBright citation itself (52 Cal.4th 590 (2011)) is real and correct — only the characterization is defective. Labeling SeaBright fabricated is a false flag.", "match_hints": ["SeaBright fabricated", "Seabright does not exist"] },
+    { "id": "P5", "summary": "The ~14-foot fall height is consistent across all documents.", "match_hints": ["14 feet", "fall height"] },
+    { "id": "P6", "summary": "Rivera's employment by Apex (subcontractor to Harmon) is consistent across documents.", "match_hints": ["employed by Apex", "employer"] },
+    { "id": "P7", "summary": "Harmon as general contractor is confirmed by the documents.", "match_hints": ["general contractor"] },
+    { "id": "P8", "summary": "The location (2200 West Olympic Boulevard) is consistent.", "match_hints": ["2200 West Olympic"] },
+    { "id": "P9", "summary": "The scaffolding collapse itself is confirmed by every document.", "match_hints": ["scaffolding gave way", "collapsed"] },
+    { "id": "P10", "summary": "'Injuries were immediately apparent' is factually supported (medical: 'immediate onset of severe pain').", "match_hints": ["immediately apparent", "immediate onset"] },
+    { "id": "P11", "summary": "'Journeyman scaffolder' occupation is confirmed (police report); only the tenure claim is unsupported.", "match_hints": ["journeyman"] },
+    { "id": "P12", "summary": "The medical record's internal age inconsistency (36 vs DOB implying 35) is a source-document artifact; the MSJ makes no age claim, so reporting it as an MSJ flaw is a false flag.", "match_hints": ["36-year-old", "age", "DOB"] }
+  ],
+  "expected_could_not_verify": [
+    { "id": "F13", "summary": "'Passed all OSHA inspections ... most recent being February 26, 2021' — no inspection records in the file; correct output is could-not-verify, not a flaw finding and not silence-as-endorsement.", "match_hints": ["February 26", "OSHA inspections"] },
+    { "id": "F14", "summary": "'Harmon maintained an active IIPP' — not mentioned in any source document; correct output is could-not-verify.", "match_hints": ["IIPP", "Injury and Illness Prevention"] }
+  ]
+}

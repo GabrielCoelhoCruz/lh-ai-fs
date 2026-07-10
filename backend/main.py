@@ -1,8 +1,11 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 
-app = FastAPI()
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+
+from orchestrator import BRIEF_NAME, run_pipeline
+
+app = FastAPI(title="BS Detector")
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,7 +27,11 @@ def load_documents() -> dict[str, str]:
 
 
 @app.post("/analyze")
-async def analyze():
+def analyze():
     documents = load_documents()
-    # TODO: Build your multi-agent pipeline here
-    return {"report": None}
+    if BRIEF_NAME not in documents:
+        raise HTTPException(
+            status_code=500, detail=f"{BRIEF_NAME}.txt not found in documents/"
+        )
+    report = run_pipeline(documents)
+    return {"report": report.model_dump()}
