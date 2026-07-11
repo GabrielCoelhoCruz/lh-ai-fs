@@ -10,7 +10,7 @@ Building the gold set *before* the pipeline was the highest-leverage decision. I
 
 **Deterministic orchestrator, LLMs never route.** Stage order, retries, degradation, and finding assembly are plain Python; agents only judge. This costs flexibility (no dynamic "agent decides what to check next") and buys debuggability and honest partial reports. For a verification product, inspectability wins.
 
-**Six agents instead of three.** Extraction, citation verification, and quote checking could be one prompt. Splitting them keeps roles non-overlapping (extraction is mechanical and cheap; verification is knowledge-bound; quote auditing is a different epistemic task), lets each run at the right model tier, and makes the adjudicator's deduplication meaningful (e.g., the Privette doctored quote is legitimately visible to two agents; the adjudicator merges, preserving the audit trail).
+**Six LLM agents plus a deterministic checker instead of three.** Extraction, citation verification, and quote checking could be one prompt. Splitting them keeps roles non-overlapping (extraction is mechanical and cheap; verification is knowledge-bound; quote auditing is a different epistemic task), lets each run at the right model tier, and makes the adjudicator's deduplication meaningful (e.g., the Privette doctored quote is legitimately visible to two agents; the adjudicator merges, preserving the audit trail). The seventh stage, `DeadlineChecker`, is pure date math — no model.
 
 **No legal database in the prototype.** Citation verification rides model knowledge with hard uncertainty discipline: "real" only for genuinely recognized authorities, `could_not_verify` otherwise, holdings never reconstructed. The eval encodes the same convention — for fabricated citations, either `likely_fabricated` or an honest `could_not_verify` scores as correct; a confident invented holding is what gets punished. In production this is the first thing I'd replace with a CourtListener existence check (see production plan §5). One deterministic signal made it into the prototype anyway: a reporter-series/year sanity check (887 F.2d cannot be 1991).
 
@@ -29,7 +29,7 @@ Building the gold set *before* the pipeline was the highest-leverage decision. I
 
 ## Honest accounting
 
-Any eval numbers reported in `evals/results.json` come from real runs of `python run_evals.py` — nothing cherry-picked; the harness saves the raw reports it scored alongside the scores. Where the pipeline misses a gold flaw, the miss is visible in per-flaw credit. Time spent: research and gold-set construction consumed roughly as much as implementation, which was the point — the AI-heavy workflow shifts human effort from typing code to deciding what "correct" means and verifying it.
+Any eval numbers reported in `evals/results.json` come from real runs of `python run_evals.py` — nothing cherry-picked; the harness saves the raw reports it scored alongside the scores. Where the pipeline misses a gold flaw, the miss is visible in per-flaw credit. Time spent: ~14 hours total (research/gold ~5, implementation ~6, prod plan ~3) — over the recommended box; overage went to eval integrity after the truncation postmortem. Research and gold-set construction still consumed roughly as much as implementation, which was the point — the AI-heavy workflow shifts human effort from typing code to deciding what "correct" means and verifying it.
 
 ## Addendum — truncation bug and eval integrity (Jul 2026)
 

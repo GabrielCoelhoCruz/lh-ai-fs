@@ -53,7 +53,7 @@ Three terminal failure modes (not retryable): safety refusal (`output_parsed is 
 | gpt-5.4-mini | $0.75 | $0.075 | $4.50 | cheap-fast |
 | gpt-5.4-nano | $0.20 | $0.02 | $1.25 | cheapest |
 
-Pipeline routing: extraction/classification steps → `gpt-5.4-nano` (effort minimal/low); verification/reasoning steps → `gpt-5.6-terra` (effort high); `gpt-5.6-sol` only if terra underperforms in evals. Reasoning tokens bill as output tokens — main cost driver on verification. Repeated system prompts hit cached-input rates automatically (~90% input discount). Pin suffixed IDs (`-terra`), not bare `gpt-5.6`.
+Pipeline routing (submission defaults): extraction/classification steps → `gpt-5.4-nano` (effort minimal/low); verification/reasoning steps → `gpt-5.5` (effort medium/high per stage). `gpt-5.6-terra` / `gpt-5.6-sol` remain options if evals warrant a change. Reasoning tokens bill as output tokens — main cost driver on verification. Repeated system prompts hit cached-input rates automatically (~90% input discount).
 
 ## Strict-schema constraints
 

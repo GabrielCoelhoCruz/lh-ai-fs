@@ -29,7 +29,7 @@ load_dotenv()
 log = logging.getLogger(__name__)
 
 MODEL_FAST = os.getenv("BSD_MODEL_FAST", "gpt-5.4-nano")
-MODEL_REASONING = os.getenv("BSD_MODEL_REASONING", "gpt-5.6-terra")
+MODEL_REASONING = os.getenv("BSD_MODEL_REASONING", "gpt-5.5")
 
 PIPELINE_LOGICAL_CALLS = 6
 JUDGE_LOGICAL_CALLS = 1

@@ -1,5 +1,7 @@
 # Production Readiness Plan
 
+> Challenge brief (upstream) — the actual plan is [`production-readiness.md`](production-readiness.md).
+
 This is Part 2 of the BS Detector challenge. Treat it as a standalone system design challenge, not as a short reflection or README appendix.
 
 Part 1 asks you to build the first working version of BS Detector. Part 2 asks you to describe how that prototype should become an MVP that can support real customers at startup scale.

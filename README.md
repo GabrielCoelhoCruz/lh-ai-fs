@@ -6,6 +6,8 @@ Legal briefs lie. Not always intentionally — but they do. They cite cases that
 
 **93.3% ± 9.1% recall · 85.0% ± 3.4% precision · 0% hallucination** over 5 live uncached runs (all 7 stages `ok` every run; F12 = 1.0 every run via deterministic deadline check).
 
+Published runs: `gpt-5.4-nano` (fast) / `gpt-5.5` (reasoning) — the same defaults in `backend/llm.py`, so a fresh `run_evals.py` reproduces these numbers without env overrides.
+
 ```bash
 cd backend && python run_evals.py --runs 5 --max-api-calls 35
 ```
@@ -75,7 +77,7 @@ The pipeline is seven named stages over typed Pydantic handoffs, driven by a det
 
 Every stage is recorded in the report with state and duration; a stage failure degrades the report instead of aborting it. Claims the pipeline cannot check are reported as **could not verify** — never guessed. `POST /analyze` returns the full structured `VerificationReport` (see `backend/schemas.py`).
 
-Models are configurable via env vars: `BSD_MODEL_FAST` (default `gpt-5.4-nano`) and `BSD_MODEL_REASONING` (default `gpt-5.6-terra`).
+Models are configurable via env vars: `BSD_MODEL_FAST` (default `gpt-5.4-nano`) and `BSD_MODEL_REASONING` (default `gpt-5.5`).
 
 ### Running the evals
 

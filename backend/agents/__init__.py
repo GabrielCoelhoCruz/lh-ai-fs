@@ -1,6 +1,6 @@
 """BS Detector pipeline agents.
 
-Six agents with distinct, non-overlapping roles:
+Six LLM agents with distinct, non-overlapping roles (plus deterministic `DeadlineChecker` in the orchestrator):
 
 1. CitationExtractor    — brief text -> structured citation inventory
 2. CitationVerifier     — does each cited authority exist / support the claim?
