@@ -2,6 +2,18 @@
 
 Legal briefs lie. Not always intentionally — but they do. They cite cases that don't say what they claim. They quote authority with words quietly removed. They state facts that contradict the documents sitting right next to them.
 
+## Submission
+
+**93.3% ± 9.1% recall · 85.0% ± 3.4% precision · 0% hallucination** over 5 live uncached runs (all 7 stages `ok` every run; F12 = 1.0 every run via deterministic deadline check).
+
+```bash
+cd backend && python run_evals.py --runs 5 --max-api-calls 35
+```
+
+Details: [eval findings](docs/eval-findings.md) · [production readiness](docs/production-readiness.md) · [reflection](docs/reflection.md)
+
+---
+
 Your task has two parts:
 
 1. Build an AI pipeline that catches problems in the provided legal brief.
@@ -31,7 +43,7 @@ cd backend
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env      # Add your OpenAI API key
+cp ../.env.example .env      # Add your OpenAI API key
 uvicorn main:app --reload
 ```
 
@@ -49,7 +61,7 @@ The UI runs at `http://localhost:5175`.
 
 ## Solution Overview
 
-The pipeline is six named agents over typed Pydantic handoffs, driven by a deterministic Python orchestrator (`backend/orchestrator.py`) — LLMs make judgments inside stages, never control flow:
+The pipeline is seven named stages over typed Pydantic handoffs, driven by a deterministic Python orchestrator (`backend/orchestrator.py`) — LLMs make judgments inside stages, never control flow:
 
 | # | Agent | Role | Model tier |
 |---|---|---|---|
@@ -57,8 +69,9 @@ The pipeline is six named agents over typed Pydantic handoffs, driven by a deter
 | 2 | `CitationVerifier` | existence + does-it-support-the-proposition per authority, with a deterministic reporter-year sanity check | reasoning |
 | 3 | `QuoteChecker` | are direct quotes the authority's actual words? | reasoning |
 | 4 | `CrossDocChecker` | brief's factual claims vs. police report / medical records / witness statement, verbatim evidence quotes | reasoning |
-| 5 | `ConfidenceAdjudicator` | dedupe + 0–1 confidence with reasoning per finding | reasoning |
-| 6 | `JudicialMemoWriter` | one-paragraph bench memo from the verified findings | reasoning (low effort) |
+| 5 | `DeadlineChecker` | self-defeating time-barred / SOL date math (CCP 335.1 / 730 days) | deterministic (no model) |
+| 6 | `ConfidenceAdjudicator` | dedupe + 0–1 confidence with reasoning per finding | reasoning |
+| 7 | `JudicialMemoWriter` | one-paragraph bench memo from the verified findings | reasoning (low effort) |
 
 Every stage is recorded in the report with state and duration; a stage failure degrades the report instead of aborting it. Claims the pipeline cannot check are reported as **could not verify** — never guessed. `POST /analyze` returns the full structured `VerificationReport` (see `backend/schemas.py`).
 
@@ -68,12 +81,28 @@ Models are configurable via env vars: `BSD_MODEL_FAST` (default `gpt-5.4-nano`) 
 
 ```bash
 cd backend
-python run_evals.py            # one pipeline run, scored against evals/gold.json
-python run_evals.py --runs 3   # repeat runs to see variance
-python run_evals.py --report evals/report-run1.json   # re-score a saved report (no API cost)
+python run_evals.py --smoke    # cheapest diagnostic: one fast-model run, no judge
+python run_evals.py            # one full run, at most 7 API attempts
+python run_evals.py --runs 5 --max-api-calls 35   # submission measurement (live, cache off)
+python run_evals.py --report evals/report-run1.json   # re-score a saved report (deterministic, no API cost)
 ```
 
-The harness measures **recall** (of 12 known planted flaws, fractional credit for the six-case footnote), **precision** (findings that flag true statements count against it — the gold set includes explicit precision traps), and **hallucination rate** (mechanical check: every evidence quote must actually appear in the cited document). It also verifies the two deliberately uncheckable claims surface as *could-not-verify* rather than as findings or silence. Results and the full finding-to-gold mapping land in `backend/evals/results.json` so every score is auditable. Gold-set provenance: `docs/research/flaw-audit.md` reconciled with the web-verified citation dossier in `docs/research/caselaw-dossier.md`.
+Start with `--smoke`. It forces the fast model and low reasoning effort for all stages. It also skips the paid scoring judge, so use its score only as a diagnostic. A full run preserves the configured reasoning models and adds the judge.
+
+The command logs every stage and LLM call at INFO (eval enables this; the API
+server does not print progress to stdout). SDK and stage retries default to zero.
+Full calls use a 180-second timeout and a 16,000-token output/reasoning cap; smoke
+calls use 60 seconds and 1,200 tokens. Override these limits with `--timeout-s`
+and `--max-output-tokens`. `--max-api-calls` caps possible network attempts. The
+command refuses to start if the requested runs and retries could exceed it. To
+reproduce the former retry behavior explicitly, use
+`--sdk-retries 3 --stage-retries 1 --timeout-s 180 --max-api-calls 52` for one run.
+
+Each completed report is written atomically to `backend/evals/report-runN.json`. Each completed score immediately updates `backend/evals/results.json`, so stopping a later run does not erase earlier work. When the Responses API returns usage, the terminal and results file show input, output, reasoning, and total tokens.
+
+**`BSD_LLM_CACHE` (dev iteration only).** Off by default. Set `BSD_LLM_CACHE=1` to record/replay successful pipeline LLM responses under `backend/evals/llm-cache/` (or set the env to a custom directory path). The scoring judge is never cached (`cache=False`). Published submission numbers always come from live runs with the cache unset — do not enable it for measurement runs.
+
+The harness measures **recall** (of 12 known planted flaws, fractional credit for the six-case footnote), **precision** (findings that flag true statements count against it — the gold set includes explicit precision traps), and **hallucination rate** (mechanical check: every evidence quote must actually appear in the cited document). It also verifies the two deliberately uncheckable claims surface as *could-not-verify* rather than as findings or silence. Results and the full finding-to-gold mapping land in `backend/evals/results.json` so every score is auditable. Gold-set provenance: `docs/research/flaw-audit.md` reconciled with the web-verified citation dossier in `docs/research/caselaw-dossier.md`. Per-run tables and variance: [eval findings](docs/eval-findings.md).
 
 Further reading: [production readiness plan](docs/production-readiness.md) · [reflection](docs/reflection.md) · [research notes](docs/research/).
 
