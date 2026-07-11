@@ -7,7 +7,13 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from assembly import BRIEF_NAME, assemble, filter_ungrounded
 from deadline_check import check_deadline
-from schemas import CitationExtraction, UncitedLegalAssertion
+from schemas import (
+    CitationExtraction,
+    CrossDocCheck,
+    EvidenceQuote,
+    FactCheck,
+    UncitedLegalAssertion,
+)
 
 DOCS_DIR = Path(__file__).parent / "documents"
 REAL_BRIEF = (DOCS_DIR / "motion_for_summary_judgment.txt").read_text(
@@ -152,6 +158,91 @@ def test_assemble_single_uncited_assertion_unchanged():
     assert "Uncited assertions:" not in f.description
 
 
+def test_deadline_id_stays_unique_against_cnv_sequence():
+    """Regression: do not stamp deadline as finding-{len(findings)+1}.
+
+    assemble() shares one sequence across findings and CNV. Renumbering
+    deadline from findings alone can collide with an existing id and
+    double-count TPs in the eval scorer. Keep the stable finding-deadline id.
+    """
+    # 18 CNV rows consume finding-1..finding-18; one real finding is finding-19.
+    facts = CrossDocCheck(
+        facts=[
+            FactCheck(
+                fact_id=f"cnv-{i}",
+                claim_text=f"Uncheckable claim number {i} about OSHA records.",
+                brief_location=f"Section II, para {i}",
+                status="could_not_verify",
+                evidence=[],
+                reasoning="Outside case file",
+                confidence="low",
+            )
+            for i in range(1, 19)
+        ]
+        + [
+            FactCheck(
+                fact_id="real-1",
+                claim_text="Rivera wore no PPE at the time of the incident.",
+                brief_location="Section II",
+                status="contradicted",
+                evidence=[
+                    EvidenceQuote(
+                        document="police_report",
+                        quote="Rivera was wearing a hard hat and safety harness",
+                    )
+                ],
+                reasoning="Police report contradicts",
+                confidence="high",
+            )
+        ]
+    )
+    findings, cnv, _notes = assemble(None, None, None, facts)
+    assert any(f.finding_id == "finding-19" for f in findings)
+    assert len(cnv) == 18
+
+    # Old footgun: len(findings)+1 ignores CNV sequence → collides with an
+    # already-issued id (here finding-2 in CNV; with a longer findings list
+    # the same formula produced the committed finding-19 doubles).
+    existing = {f.finding_id for f in findings} | {f.finding_id for f in cnv}
+    old_id = f"finding-{len(findings) + 1}"
+    assert old_id in existing
+
+    deadline = check_deadline(_TIMELY_TIME_BARRED)
+    assert deadline is not None
+    # Mirror the fixed orchestrator path: append as-is (no renumber).
+    findings.append(deadline)
+
+    all_ids = [f.finding_id for f in findings] + [f.finding_id for f in cnv]
+    assert len(all_ids) == len(set(all_ids)), (
+        f"duplicate finding_ids: "
+        f"{[i for i in all_ids if all_ids.count(i) > 1]}"
+    )
+    deadline_rows = [f for f in findings if f.source_agent == "DeadlineChecker"]
+    assert len(deadline_rows) == 1
+    assert deadline_rows[0].finding_id == "finding-deadline"
+
+
+def test_contradicted_without_source_evidence_becomes_cnv():
+    facts = CrossDocCheck(
+        facts=[
+            FactCheck(
+                fact_id="bare",
+                claim_text="The scaffold was inspected the morning of the incident.",
+                brief_location="Section II",
+                status="contradicted",
+                evidence=[],
+                reasoning="Model asserted contradiction without quotes",
+                confidence="high",
+            )
+        ]
+    )
+    findings, cnv, _notes = assemble(None, None, None, facts)
+    assert findings == []
+    assert len(cnv) == 1
+    assert cnv[0].category == "could_not_verify"
+    assert "without source evidence" in cnv[0].title.lower()
+
+
 def main() -> int:
     test_timely_but_time_barred_emits_misleading_framing()
     test_genuinely_late_filing_returns_none()
@@ -159,6 +250,8 @@ def main() -> int:
     test_real_brief_finding_survives_filter_ungrounded()
     test_assemble_merges_multiple_uncited_assertions()
     test_assemble_single_uncited_assertion_unchanged()
+    test_deadline_id_stays_unique_against_cnv_sequence()
+    test_contradicted_without_source_evidence_becomes_cnv()
     print("All deadline/merge probe tests passed.")
     return 0
 

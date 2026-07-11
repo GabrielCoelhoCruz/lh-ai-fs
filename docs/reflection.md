@@ -61,4 +61,6 @@ Any eval numbers reported in `evals/results.json` come from real runs of `python
 
 **Deliberately skipped.** CourtListener / any legal DB in the prototype — honest `could_not_verify` beats a fake existence check. Dynamic agent routing. Retry-with-escalating-cap machinery.
 
-**Updated live numbers (cache OFF, 5 runs, `--max-api-calls 35`).** Recall **93.3% ± 9.1%**, precision **85.0% ± 3.4%**, hallucination **0%**. All seven stages `ok` every run. Full tables: `docs/eval-findings.md`.
+**Updated live numbers (cache OFF, 5 runs, `--max-api-calls 35`).** Recall **98.3% ± 3.7%**, precision **80.5% ± 6.9%**, ungrounded-evidence rate **0%**. All seven stages `ok` every run. Full tables: `docs/eval-findings.md`.
+
+**Pre-submit integrity fix.** An earlier 85.0% precision was inflated by a DeadlineChecker finding-ID collision (F12 double-counted as TP). Fixed by keeping `finding-deadline`; republished from a fresh untainted live session (`logical_calls: 35`). Lower precision, correct accounting.

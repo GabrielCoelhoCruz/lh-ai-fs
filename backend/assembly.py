@@ -280,18 +280,38 @@ def assemble(
     if facts:
         for f in facts.facts:
             if f.status == "contradicted":
-                findings.append(
-                    make(
-                        "cross_document_contradiction",
-                        "high" if f.confidence == "high" else "medium",
-                        f"Brief claim contradicted by case file: {f.claim_text[:80]}",
-                        f.reasoning,
-                        f.brief_location,
-                        [EvidenceQuote(document=BRIEF_NAME, quote=f.claim_text)]
-                        + f.evidence,
-                        "CrossDocChecker",
+                # Contradiction findings require source-document evidence.
+                # Brief claim_text alone is not enough (schema allows empty
+                # evidence lists; that must not become a high-severity finding).
+                if not f.evidence:
+                    cnv.append(
+                        make(
+                            "could_not_verify",
+                            "low",
+                            f"Contradiction claimed without source evidence: "
+                            f"{f.claim_text[:80]}",
+                            f.reasoning
+                            + " (demoted: contradicted status had no source "
+                            "evidence quotes)",
+                            f.brief_location,
+                            [EvidenceQuote(document=BRIEF_NAME, quote=f.claim_text)],
+                            "CrossDocChecker",
+                        )
                     )
-                )
+                else:
+                    findings.append(
+                        make(
+                            "cross_document_contradiction",
+                            "high" if f.confidence == "high" else "medium",
+                            f"Brief claim contradicted by case file: "
+                            f"{f.claim_text[:80]}",
+                            f.reasoning,
+                            f.brief_location,
+                            [EvidenceQuote(document=BRIEF_NAME, quote=f.claim_text)]
+                            + f.evidence,
+                            "CrossDocChecker",
+                        )
+                    )
             elif f.status == "unsupported":
                 findings.append(
                     make(

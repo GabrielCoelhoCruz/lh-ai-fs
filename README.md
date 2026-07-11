@@ -4,7 +4,9 @@ Legal briefs lie. Not always intentionally — but they do. They cite cases that
 
 ## Submission
 
-**93.3% ± 9.1% recall · 85.0% ± 3.4% precision · 0% hallucination** over 5 live uncached runs (all 7 stages `ok` every run; F12 = 1.0 every run via deterministic deadline check).
+**98.3% ± 3.7% recall · 80.5% ± 6.9% precision · 0% ungrounded-evidence rate** over 5 live uncached runs (all 7 stages `ok` every run; F12 = 1.0 every run via deterministic deadline check; `results.json` shows `max_api_calls: 35` / `logical_calls: 35`).
+
+An earlier published 85.0% precision was inflated by a DeadlineChecker finding-ID collision that double-counted F12 as a TP. Fixed (`finding-deadline` is stable); these numbers are from a fresh untainted session after the fix.
 
 Published runs: `gpt-5.4-nano` (fast) / `gpt-5.5` (reasoning) — the same defaults in `backend/llm.py`, so a fresh `run_evals.py` reproduces these numbers without env overrides.
 
@@ -83,10 +85,11 @@ Models are configurable via env vars: `BSD_MODEL_FAST` (default `gpt-5.4-nano`) 
 
 ```bash
 cd backend
+python -m pytest test_*_probes.py -q
 python run_evals.py --smoke    # cheapest diagnostic: one fast-model run, no judge
 python run_evals.py            # one full run, at most 7 API attempts
 python run_evals.py --runs 5 --max-api-calls 35   # submission measurement (live, cache off)
-python run_evals.py --report evals/report-run1.json   # re-score a saved report (deterministic, no API cost)
+python run_evals.py --report evals/report-run1.json   # re-score a saved report (deterministic, no API cost; writes results-offline-*.json, never overwrites results.json)
 ```
 
 Start with `--smoke`. It forces the fast model and low reasoning effort for all stages. It also skips the paid scoring judge, so use its score only as a diagnostic. A full run preserves the configured reasoning models and adds the judge.
@@ -100,11 +103,11 @@ command refuses to start if the requested runs and retries could exceed it. To
 reproduce the former retry behavior explicitly, use
 `--sdk-retries 3 --stage-retries 1 --timeout-s 180 --max-api-calls 52` for one run.
 
-Each completed report is written atomically to `backend/evals/report-runN.json`. Each completed score immediately updates `backend/evals/results.json`, so stopping a later run does not erase earlier work. When the Responses API returns usage, the terminal and results file show input, output, reasoning, and total tokens.
+Each completed report is written atomically to `backend/evals/report-runN.json`. Each completed **live** score immediately updates `backend/evals/results.json`, so stopping a later run does not erase earlier work. Offline `--report` writes `backend/evals/results-offline-<stem>.json` instead and never touches the live results file. When the Responses API returns usage, the terminal and results file show input, output, reasoning, and total tokens.
 
 **`BSD_LLM_CACHE` (dev iteration only).** Off by default. Set `BSD_LLM_CACHE=1` to record/replay successful pipeline LLM responses under `backend/evals/llm-cache/` (or set the env to a custom directory path). The scoring judge is never cached (`cache=False`). Published submission numbers always come from live runs with the cache unset — do not enable it for measurement runs.
 
-The harness measures **recall** (of 12 known planted flaws, fractional credit for the six-case footnote), **precision** (findings that flag true statements count against it — the gold set includes explicit precision traps), and **hallucination rate** (mechanical check: every evidence quote must actually appear in the cited document). It also verifies the two deliberately uncheckable claims surface as *could-not-verify* rather than as findings or silence. Results and the full finding-to-gold mapping land in `backend/evals/results.json` so every score is auditable. Gold-set provenance: `docs/research/flaw-audit.md` reconciled with the web-verified citation dossier in `docs/research/caselaw-dossier.md`. Per-run tables and variance: [eval findings](docs/eval-findings.md).
+The harness measures **recall** (of 12 known planted flaws, fractional credit for the six-case footnote), **precision** (findings that flag true statements count against it — the gold set includes explicit precision traps), and **ungrounded-evidence rate** (mechanical check: every evidence quote must actually appear in the cited document; JSON key remains `hallucination_rate` for continuity — this is not a semantic hallucination score). It also verifies the two deliberately uncheckable claims surface as *could-not-verify* rather than as findings or silence. Results and the full finding-to-gold mapping land in `backend/evals/results.json` so every score is auditable. Gold-set provenance: `docs/research/flaw-audit.md` reconciled with the web-verified citation dossier in `docs/research/caselaw-dossier.md`. Per-run tables and variance: [eval findings](docs/eval-findings.md).
 
 Further reading: [production readiness plan](docs/production-readiness.md) · [reflection](docs/reflection.md) · [research notes](docs/research/).
 

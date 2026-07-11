@@ -1,169 +1,12 @@
 {
-  "timestamp": "2026-07-11T00:18:07.603314+00:00",
+  "timestamp": "2026-07-11T02:01:39.046226+00:00",
   "completed_runs": 5,
   "runs": [
     {
       "recall": 1.0,
-      "precision": 0.824,
+      "precision": 0.765,
       "hallucination_rate": 0.0,
       "findings_emitted": 17,
-      "duplicates_marked": 1,
-      "backfill_excluded": 0,
-      "per_gold_credit": {
-        "F1": 1.0,
-        "F2": 1.0,
-        "F3": 1.0,
-        "F4": 1.0,
-        "F5": 1.0,
-        "F6": 1.0,
-        "F7": 1.0,
-        "F8": 1.0,
-        "F9": 1.0,
-        "F10": 1.0,
-        "F11": 1.0,
-        "F12": 1.0
-      },
-      "per_finding": [
-        {
-          "finding_id": "finding-16",
-          "category": "cross_document_contradiction",
-          "title": "Brief's March 14 scaffolding-incident date is contradicted by March 12 records",
-          "matched_gold": "F1",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-14",
-          "category": "cross_document_contradiction",
-          "title": "Brief's March 14 incident date is contradicted by March 12 records",
-          "matched_gold": "F1",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-17",
-          "category": "cross_document_contradiction",
-          "title": "Brief's no-PPE claim is contradicted by police and witness records",
-          "matched_gold": "F2",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-18",
-          "category": "misleading_framing",
-          "title": "Time-bar heading is undermined by the brief's concession that filing was nominally within two years",
-          "matched_gold": "F12",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-28",
-          "category": "cross_document_contradiction",
-          "title": "Complaint-timing assertion relies on unsupported filing date and inconsistent elapsed-time calculation",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-12",
-          "category": "doctored_quote",
-          "title": "Quotation attributed to Privette v. Superior Court appears doctored",
-          "matched_gold": "F5",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-20",
-          "category": "cross_document_contradiction",
-          "title": "Record evidence undercuts claim that Apex alone was responsible for scaffolding safety",
-          "matched_gold": "F3",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-5",
-          "category": "mischaracterized_holding",
-          "title": "Seabright does not support the brief's OSHA-insulation proposition",
-          "matched_gold": "F6",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-4",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be verified: Kellerman v. Pacific Coast Construction, Inc.",
-          "matched_gold": "F7",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-22",
-          "category": "cross_document_contradiction",
-          "title": "Record evidence contradicts assertion that Rivera presented no rebuttal evidence",
-          "matched_gold": "F4",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-2",
-          "category": "mischaracterized_holding",
-          "title": "Brief overstates Privette v. Superior Court",
-          "matched_gold": "F5",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-23",
-          "category": "cross_document_contradiction",
-          "title": "Record evidence undercuts claim that OSHA record proves fully compliant safety practices",
-          "matched_gold": "F4",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-15",
-          "category": "unsupported_assertion",
-          "title": "Unsupported record assertions about Apex's license and retention by Harmon",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-24",
-          "category": "unsupported_assertion",
-          "title": "Unsupported assertion about Rivera's eight years of experience",
-          "matched_gold": "F10",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-19",
-          "category": "unsupported_assertion",
-          "title": "Unsupported complaint filing date",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-1",
-          "category": "unsupported_assertion",
-          "title": "Legal arguments advanced without supporting authority",
-          "matched_gold": "F11",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-3",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be verified: Whitmore v. Delgado Scaffolding Co.",
-          "matched_gold": "F8",
-          "counts_as": "TP"
-        }
-      ],
-      "ungrounded_evidence": [],
-      "uncertainty_handling": {
-        "F13": "correct (could_not_verify)",
-        "F14": "correct (could_not_verify)"
-      },
-      "stage_states": {
-        "CitationExtractor": "ok",
-        "CitationVerifier": "ok",
-        "QuoteChecker": "ok",
-        "CrossDocChecker": "ok",
-        "DeadlineChecker": "ok",
-        "ConfidenceAdjudicator": "ok",
-        "JudicialMemoWriter": "ok"
-      }
-    },
-    {
-      "recall": 1.0,
-      "precision": 0.895,
-      "hallucination_rate": 0.0,
-      "findings_emitted": 19,
       "duplicates_marked": 0,
       "backfill_excluded": 0,
       "per_gold_credit": {
@@ -184,50 +27,29 @@
         {
           "finding_id": "finding-14",
           "category": "cross_document_contradiction",
-          "title": "Brief gives March 14 incident date contradicted by records showing March 12",
+          "title": "Brief claim contradicted by case file: incident date stated as March 14, 2021",
           "matched_gold": "F1",
           "counts_as": "TP"
         },
         {
           "finding_id": "finding-16",
           "category": "cross_document_contradiction",
-          "title": "Fact 3 gives March 14 accident date contradicted by March 12 records",
+          "title": "Brief claim contradicted by case file: incident date stated as March 14, 2021",
           "matched_gold": "F1",
           "counts_as": "TP"
         },
         {
           "finding_id": "finding-17",
           "category": "cross_document_contradiction",
-          "title": "Brief says Rivera lacked PPE, but police and witness records say he wore required PPE",
+          "title": "Brief claim contradicted by case file: Rivera was not wearing required PPE",
           "matched_gold": "F2",
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-28",
+          "finding_id": "finding-27",
           "category": "cross_document_contradiction",
-          "title": "Time-bar section gives March 14 incident date contradicted by March 12 records",
+          "title": "Brief claim contradicted by case file: incident date stated as March 14, 2021",
           "matched_gold": "F1",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-19",
-          "category": "misleading_framing",
-          "title": "Time-barred heading is undercut by the brief\u2019s concession that filing was nominally within the limitations window",
-          "matched_gold": "F12",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-19",
-          "category": "misleading_framing",
-          "title": "Time-barred heading is undercut by the brief\u2019s concession that filing was nominally within the limitations window",
-          "matched_gold": "F12",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-22",
-          "category": "cross_document_contradiction",
-          "title": "Brief says Rivera presented no rebuttal evidence, but file contains unsafe-scaffold evidence",
-          "matched_gold": "F4",
           "counts_as": "TP"
         },
         {
@@ -238,31 +60,10 @@
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-2",
-          "category": "mischaracterized_holding",
-          "title": "Privette proposition stated as categorical hirer immunity",
-          "matched_gold": "F5",
-          "counts_as": "TP"
-        },
-        {
           "finding_id": "finding-20",
           "category": "cross_document_contradiction",
-          "title": "Brief\u2019s \u201cApex, not Harmon\u201d responsibility framing is undercut by evidence of Harmon direction and notice",
+          "title": "Brief claim contradicted by case file: exclusive Apex responsibility for scaffolding and safety",
           "matched_gold": "F3",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-5",
-          "category": "mischaracterized_holding",
-          "title": "Seabright does not create an OSHA-compliance presumption of due care",
-          "matched_gold": "F6",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-13",
-          "category": "doctored_quote",
-          "title": "Quotation attributed to Kellerman v. Pacific Coast Construction, Inc. appears fabricated",
-          "matched_gold": "F7",
           "counts_as": "TP"
         },
         {
@@ -280,17 +81,10 @@
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-29",
-          "category": "cross_document_contradiction",
-          "title": "Elapsed-time assertion is contradicted by the record incident date and arithmetic",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-25",
-          "category": "unsupported_assertion",
-          "title": "Claim lacks record support: Rivera had over eight years of commercial construction experience",
-          "matched_gold": "F10",
+          "finding_id": "finding-deadline",
+          "category": "misleading_framing",
+          "title": "Time-barred heading contradicted by conceded nominally timely filing",
+          "matched_gold": "F12",
           "counts_as": "TP"
         },
         {
@@ -301,18 +95,53 @@
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-24",
+          "finding_id": "finding-22",
           "category": "cross_document_contradiction",
-          "title": "Safety-compliance assertion is undercut by record evidence of unsafe scaffold conditions",
+          "title": "Brief claim contradicted by case file: Rivera has presented no evidence to rebut this presumption.",
           "matched_gold": "F4",
           "counts_as": "TP"
         },
         {
+          "finding_id": "finding-19",
+          "category": "unsupported_assertion",
+          "title": "Claim asserted without record support: Rivera filed the instant action on March 10, 2023.",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-24",
+          "category": "unsupported_assertion",
+          "title": "Claim asserted without record support: over eight years of commercial-construction experience",
+          "matched_gold": "F10",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-28",
+          "category": "unsupported_assertion",
+          "title": "Claim asserted without record support: Rivera did not file his complaint until March 10, 2023",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
           "finding_id": "finding-15",
           "category": "unsupported_assertion",
-          "title": "Claim lacks record support: licensed subcontractor retained by Harmon for scaffolding work",
+          "title": "Claim asserted without record support: Apex was a licensed subcontractor retained by Harmon",
           "matched_gold": "P6",
           "counts_as": "FP-trap"
+        },
+        {
+          "finding_id": "finding-5",
+          "category": "mischaracterized_holding",
+          "title": "Authority does not support the stated proposition: Seabright Insurance Co. v. US Airways, Inc.",
+          "matched_gold": "F6",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-29",
+          "category": "cross_document_contradiction",
+          "title": "Brief claim contradicted by case file: elapsed time stated as one year and 362 days",
+          "matched_gold": null,
+          "counts_as": "FP"
         }
       ],
       "ungrounded_evidence": [],
@@ -328,19 +157,31 @@
         "DeadlineChecker": "ok",
         "ConfidenceAdjudicator": "ok",
         "JudicialMemoWriter": "ok"
+      },
+      "llm_usage": {
+        "logical_calls": 7,
+        "api_attempts_reserved": 7,
+        "input_tokens": 25303,
+        "output_tokens": 30700,
+        "reasoning_tokens": 16161,
+        "total_tokens": 56003,
+        "model_override": null,
+        "effort_override": null,
+        "timeout_s": 180.0,
+        "max_output_tokens": 16000
       }
     },
     {
-      "recall": 0.833,
-      "precision": 0.857,
+      "recall": 1.0,
+      "precision": 0.75,
       "hallucination_rate": 0.0,
-      "findings_emitted": 14,
-      "duplicates_marked": 1,
+      "findings_emitted": 20,
+      "duplicates_marked": 0,
       "backfill_excluded": 0,
       "per_gold_credit": {
         "F1": 1.0,
-        "F2": 0.0,
-        "F3": 0.0,
+        "F2": 1.0,
+        "F3": 1.0,
         "F4": 1.0,
         "F5": 1.0,
         "F6": 1.0,
@@ -353,10 +194,45 @@
       },
       "per_finding": [
         {
-          "finding_id": "finding-22",
+          "finding_id": "finding-14",
           "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: Rivera has presented no evidence to rebut this presumption.",
-          "matched_gold": "F4",
+          "title": "Brief incident date conflicts with case file",
+          "matched_gold": "F1",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-16",
+          "category": "cross_document_contradiction",
+          "title": "Brief incident date in Fact 3 conflicts with case file",
+          "matched_gold": "F1",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-17",
+          "category": "cross_document_contradiction",
+          "title": "Brief PPE noncompliance claim is contradicted by case file",
+          "matched_gold": "F2",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-27",
+          "category": "cross_document_contradiction",
+          "title": "Brief incident date in limitations section conflicts with case file",
+          "matched_gold": "F1",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-deadline",
+          "category": "misleading_framing",
+          "title": "Time-barred heading is undermined by the section\u2019s own timeliness concession",
+          "matched_gold": "F12",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-20",
+          "category": "cross_document_contradiction",
+          "title": "Exclusive Apex-responsibility framing is undercut by case file",
+          "matched_gold": "F3",
           "counts_as": "TP"
         },
         {
@@ -367,9 +243,178 @@
           "counts_as": "TP"
         },
         {
+          "finding_id": "finding-23",
+          "category": "cross_document_contradiction",
+          "title": "OSHA-compliance and safety-practices claim is undercut by case file",
+          "matched_gold": "F4",
+          "counts_as": "TP"
+        },
+        {
           "finding_id": "finding-2",
           "category": "mischaracterized_holding",
-          "title": "Authority does not support the stated absolute Privette proposition",
+          "title": "Authority does not support absolute \u201cnever liable\u201d Privette proposition",
+          "matched_gold": "F5",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-22",
+          "category": "cross_document_contradiction",
+          "title": "\u201cNo evidence to rebut\u201d claim is contradicted by plaintiff-side witness statement",
+          "matched_gold": "F4",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-4",
+          "category": "fabricated_citation",
+          "title": "Cited authority could not be located: Kellerman v. Pacific Coast Construction, Inc.",
+          "matched_gold": "F7",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-29",
+          "category": "cross_document_contradiction",
+          "title": "Limitations elapsed-time calculation is arithmetically inconsistent",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-19",
+          "category": "unsupported_assertion",
+          "title": "Claim lacks record support for March 10, 2023 filing date",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-28",
+          "category": "unsupported_assertion",
+          "title": "Claim lacks record support for complaint filing date",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-24",
+          "category": "unsupported_assertion",
+          "title": "Claim lacks record support for Rivera\u2019s eight years of construction experience",
+          "matched_gold": "F10",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-15",
+          "category": "unsupported_assertion",
+          "title": "Claim lacks record support that Apex was licensed, retained by Harmon, and retained for scaffolding work",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-30",
+          "category": "unsupported_assertion",
+          "title": "Timing assertion depends on unsupported filing date",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-5",
+          "category": "mischaracterized_holding",
+          "title": "Authority does not support broad OSHA-compliance proposition: Seabright Insurance Co. v. US Airways, Inc.",
+          "matched_gold": "F6",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-1",
+          "category": "unsupported_assertion",
+          "title": "Legal argument advanced without supporting authority",
+          "matched_gold": "F11",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-3",
+          "category": "fabricated_citation",
+          "title": "Cited authority could not be located: Whitmore v. Delgado Scaffolding Co.",
+          "matched_gold": "F8",
+          "counts_as": "TP"
+        }
+      ],
+      "ungrounded_evidence": [],
+      "uncertainty_handling": {
+        "F13": "correct (could_not_verify)",
+        "F14": "correct (could_not_verify)"
+      },
+      "stage_states": {
+        "CitationExtractor": "ok",
+        "CitationVerifier": "ok",
+        "QuoteChecker": "ok",
+        "CrossDocChecker": "ok",
+        "DeadlineChecker": "ok",
+        "ConfidenceAdjudicator": "ok",
+        "JudicialMemoWriter": "ok"
+      },
+      "llm_usage": {
+        "logical_calls": 7,
+        "api_attempts_reserved": 7,
+        "input_tokens": 26064,
+        "output_tokens": 29279,
+        "reasoning_tokens": 15228,
+        "total_tokens": 55343,
+        "model_override": null,
+        "effort_override": null,
+        "timeout_s": 180.0,
+        "max_output_tokens": 16000
+      }
+    },
+    {
+      "recall": 0.917,
+      "precision": 0.769,
+      "hallucination_rate": 0.0,
+      "findings_emitted": 13,
+      "duplicates_marked": 2,
+      "backfill_excluded": 0,
+      "per_gold_credit": {
+        "F1": 1.0,
+        "F2": 1.0,
+        "F3": 1.0,
+        "F4": 0.0,
+        "F5": 1.0,
+        "F6": 1.0,
+        "F7": 1.0,
+        "F8": 1.0,
+        "F9": 1.0,
+        "F10": 1.0,
+        "F11": 1.0,
+        "F12": 1.0
+      },
+      "per_finding": [
+        {
+          "finding_id": "finding-14",
+          "category": "cross_document_contradiction",
+          "title": "Incident date in introduction conflicts with source documents",
+          "matched_gold": "F1",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-17",
+          "category": "cross_document_contradiction",
+          "title": "PPE allegation conflicts with police report and witness statement",
+          "matched_gold": "F2",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-22",
+          "category": "cross_document_contradiction",
+          "title": "Witness statement contradicts assertion that Rivera presented no rebuttal evidence",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-20",
+          "category": "cross_document_contradiction",
+          "title": "Sources undercut claim that only Apex was responsible for scaffolding operations and safety",
+          "matched_gold": "F3",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-12",
+          "category": "doctored_quote",
+          "title": "Quotation attributed to Privette v. Superior Court appears materially overbroad",
           "matched_gold": "F5",
           "counts_as": "TP"
         },
@@ -381,38 +426,200 @@
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-3",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be located: Whitmore v. Delgado Scaffolding Co.",
-          "matched_gold": "F8",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-14",
+          "finding_id": "finding-28",
           "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: incident date stated as March 14, 2021",
+          "title": "Filing-delay calculation conflicts with supported incident date and is arithmetically inconsistent",
           "matched_gold": "F1",
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-16",
+          "finding_id": "finding-1",
+          "category": "unsupported_assertion",
+          "title": "Legal arguments advanced without supporting authority",
+          "matched_gold": "F11",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-deadline",
+          "category": "misleading_framing",
+          "title": "Time-barred heading is undercut by conceded filing within limitations window",
+          "matched_gold": "F12",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-5",
+          "category": "mischaracterized_holding",
+          "title": "Seabright is cited for an overbroad OSHA-compliance proposition",
+          "matched_gold": "F6",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-19",
+          "category": "unsupported_assertion",
+          "title": "Filing date asserted without record support",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-15",
+          "category": "unsupported_assertion",
+          "title": "Record does not support Apex licensing/retention details",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-24",
+          "category": "unsupported_assertion",
+          "title": "Eight-years-experience claim lacks record support",
+          "matched_gold": "F10",
+          "counts_as": "TP"
+        }
+      ],
+      "ungrounded_evidence": [],
+      "uncertainty_handling": {
+        "F13": "correct (could_not_verify)",
+        "F14": "correct (could_not_verify)"
+      },
+      "stage_states": {
+        "CitationExtractor": "ok",
+        "CitationVerifier": "ok",
+        "QuoteChecker": "ok",
+        "CrossDocChecker": "ok",
+        "DeadlineChecker": "ok",
+        "ConfidenceAdjudicator": "ok",
+        "JudicialMemoWriter": "ok"
+      },
+      "llm_usage": {
+        "logical_calls": 7,
+        "api_attempts_reserved": 7,
+        "input_tokens": 23100,
+        "output_tokens": 26479,
+        "reasoning_tokens": 13974,
+        "total_tokens": 49579,
+        "model_override": null,
+        "effort_override": null,
+        "timeout_s": 180.0,
+        "max_output_tokens": 16000
+      }
+    },
+    {
+      "recall": 1.0,
+      "precision": 0.917,
+      "hallucination_rate": 0.0,
+      "findings_emitted": 24,
+      "duplicates_marked": 0,
+      "backfill_excluded": 0,
+      "per_gold_credit": {
+        "F1": 1.0,
+        "F2": 1.0,
+        "F3": 1.0,
+        "F4": 1.0,
+        "F5": 1.0,
+        "F6": 1.0,
+        "F7": 1.0,
+        "F8": 1.0,
+        "F9": 1.0,
+        "F10": 1.0,
+        "F11": 1.0,
+        "F12": 1.0
+      },
+      "per_finding": [
+        {
+          "finding_id": "finding-14",
           "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: incident date stated as March 14, 2021",
+          "title": "Brief gives March 14, 2021 incident date, but file sources give March 12, 2021",
           "matched_gold": "F1",
           "counts_as": "TP"
         },
         {
           "finding_id": "finding-27",
           "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: The incident occurred on March 14, 2021.",
+          "title": "Time-bar section states March 14 incident date contrary to March 12 file sources",
           "matched_gold": "F1",
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-18",
+          "finding_id": "finding-16",
+          "category": "cross_document_contradiction",
+          "title": "Brief repeats March 14, 2021 incident date contrary to March 12, 2021 file sources",
+          "matched_gold": "F1",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-17",
+          "category": "cross_document_contradiction",
+          "title": "Brief says Rivera lacked required PPE, but file says he wore hard hat and harness",
+          "matched_gold": "F2",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-deadline",
           "category": "misleading_framing",
-          "title": "Time-barred heading contradicted by concession that filing falls within limitations window",
+          "title": "Time-barred heading contradicted by brief's concession that filing falls within limitations window",
           "matched_gold": "F12",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-20",
+          "category": "cross_document_contradiction",
+          "title": "Exclusive Apex responsibility framing is undercut by evidence of Harmon foreman control",
+          "matched_gold": "F3",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-12",
+          "category": "doctored_quote",
+          "title": "Quotation attributed to Privette v. Superior Court appears doctored",
+          "matched_gold": "F5",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-5",
+          "category": "mischaracterized_holding",
+          "title": "Authority does not support the stated proposition: Seabright Insurance Co. v. US Airways, Inc.",
+          "matched_gold": "F6",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-4",
+          "category": "fabricated_citation",
+          "title": "Cited authority could not be located: Kellerman v. Pacific Coast Construction, Inc.",
+          "matched_gold": "F7",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-28",
+          "category": "cross_document_contradiction",
+          "title": "Elapsed-time calculation uses contradicted incident date and appears arithmetically wrong",
+          "matched_gold": "F1",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-22",
+          "category": "cross_document_contradiction",
+          "title": "Brief says Rivera presented no rebuttal evidence despite plaintiff witness statement on unsafe scaffold",
+          "matched_gold": "F4",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-23",
+          "category": "cross_document_contradiction",
+          "title": "OSHA-compliance framing conflicts with file evidence of unsafe scaffold conditions",
+          "matched_gold": "F4",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-2",
+          "category": "mischaracterized_holding",
+          "title": "Brief overstates Privette v. Superior Court as an absolute nonliability rule",
+          "matched_gold": "F5",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-1",
+          "category": "unsupported_assertion",
+          "title": "Legal argument advanced without supporting authority",
+          "matched_gold": "F11",
           "counts_as": "TP"
         },
         {
@@ -423,372 +630,51 @@
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-5",
-          "category": "mischaracterized_holding",
-          "title": "Authority does not support the stated proposition: Seabright Insurance Co. v. US Airways, Inc.",
-          "matched_gold": "F6",
-          "counts_as": "TP"
+          "finding_id": "finding-15",
+          "category": "unsupported_assertion",
+          "title": "Claim asserted without record support: Apex was a licensed subcontractor retained by Harmon",
+          "matched_gold": "P6",
+          "counts_as": "FP-trap"
         },
         {
           "finding_id": "finding-19",
           "category": "unsupported_assertion",
-          "title": "Claim asserted without record support: Rivera filed the instant action on March 10, 2023.",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-15",
-          "category": "unsupported_assertion",
-          "title": "Claim asserted without record support: Apex was licensed and retained by Harmon for scaffolding work",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-1",
-          "category": "unsupported_assertion",
-          "title": "Legal argument advanced without supporting authority",
-          "matched_gold": "F11",
-          "counts_as": "TP"
-        }
-      ],
-      "ungrounded_evidence": [],
-      "uncertainty_handling": {
-        "F13": "correct (could_not_verify)",
-        "F14": "correct (could_not_verify)"
-      },
-      "stage_states": {
-        "CitationExtractor": "ok",
-        "CitationVerifier": "ok",
-        "QuoteChecker": "ok",
-        "CrossDocChecker": "ok",
-        "DeadlineChecker": "ok",
-        "ConfidenceAdjudicator": "ok",
-        "JudicialMemoWriter": "ok"
-      }
-    },
-    {
-      "recall": 1.0,
-      "precision": 0.864,
-      "hallucination_rate": 0.0,
-      "findings_emitted": 22,
-      "duplicates_marked": 3,
-      "backfill_excluded": 0,
-      "per_gold_credit": {
-        "F1": 1.0,
-        "F2": 1.0,
-        "F3": 1.0,
-        "F4": 1.0,
-        "F5": 1.0,
-        "F6": 1.0,
-        "F7": 1.0,
-        "F8": 1.0,
-        "F9": 1.0,
-        "F10": 1.0,
-        "F11": 1.0,
-        "F12": 1.0
-      },
-      "per_finding": [
-        {
-          "finding_id": "finding-18",
-          "category": "cross_document_contradiction",
-          "title": "Brief's no-PPE claim is contradicted by police and witness records",
-          "matched_gold": "F2",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-24",
-          "category": "cross_document_contradiction",
-          "title": "No-evidence assertion contradicted by witness safety evidence",
-          "matched_gold": "F4",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-22",
-          "category": "cross_document_contradiction",
-          "title": "Exclusive Apex-responsibility assertion is contradicted by Harmon foreman evidence",
-          "matched_gold": "F3",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-25",
-          "category": "misleading_framing",
-          "title": "Time-barred heading contradicted by brief's own timeliness concession",
-          "matched_gold": "F12",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-21",
-          "category": "cross_document_contradiction",
-          "title": "Contractor-only control framing is undercut by Harmon foreman evidence",
-          "matched_gold": "F3",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-13",
-          "category": "doctored_quote",
-          "title": "Quotation attributed to Privette v. Superior Court appears doctored",
-          "matched_gold": "F5",
-          "counts_as": "TP"
+          "title": "Claim asserted without record support: Rivera filed the action on March 10, 2023",
+          "matched_gold": "P2",
+          "counts_as": "FP-trap"
         },
         {
           "finding_id": "finding-3",
-          "category": "mischaracterized_holding",
-          "title": "Authority does not support absolute 'never liable' Privette proposition",
-          "matched_gold": "F6",
+          "category": "fabricated_citation",
+          "title": "Cited authority could not be located: Whitmore v. Delgado Scaffolding Co.",
+          "matched_gold": "F8",
           "counts_as": "TP"
         },
         {
           "finding_id": "finding-6",
-          "category": "mischaracterized_holding",
-          "title": "Seabright does not support an OSHA-compliance presumption of due care",
-          "matched_gold": "F6",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-5",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be located: Kellerman v. Pacific Coast Construction, Inc.",
-          "matched_gold": "F7",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-15",
-          "category": "cross_document_contradiction",
-          "title": "Brief's March 14, 2021 incident date conflicts with case file",
-          "matched_gold": "F1",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-26",
-          "category": "cross_document_contradiction",
-          "title": "Broad regulatory-compliance assertion is undercut by scaffold-condition evidence",
-          "matched_gold": "F4",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-16",
-          "category": "unsupported_assertion",
-          "title": "No record support for Apex licensing or Harmon retention details",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-27",
-          "category": "unsupported_assertion",
-          "title": "No record support for Rivera's claimed eight years of experience",
-          "matched_gold": "F10",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-20",
-          "category": "unsupported_assertion",
-          "title": "No record support for March 10, 2023 filing date",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-2",
-          "category": "mischaracterized_holding",
-          "title": "Brief overstates Privette v. Superior Court",
-          "matched_gold": "F5",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-1",
-          "category": "unsupported_assertion",
-          "title": "Legal argument advanced without supporting authority",
-          "matched_gold": "F11",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-7",
           "category": "fabricated_citation",
           "title": "Cited authority could not be located: Torres v. Granite Falls Dev. Corp.",
           "matched_gold": "F9",
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-8",
+          "finding_id": "finding-7",
           "category": "fabricated_citation",
           "title": "Cited authority could not be located: Blackwell v. Sunrise Contractors, Inc.",
           "matched_gold": "F9",
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-11",
+          "finding_id": "finding-10",
           "category": "fabricated_citation",
           "title": "Cited authority could not be located: Nguyen v. Allied Pacific Construction Co.",
           "matched_gold": "F9",
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-12",
+          "finding_id": "finding-11",
           "category": "fabricated_citation",
           "title": "Cited authority could not be located: Reeves v. Summit Engineering Group",
-          "matched_gold": "F9",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-4",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be located: Whitmore v. Delgado Scaffolding Co.",
-          "matched_gold": "F8",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-32",
-          "category": "cross_document_contradiction",
-          "title": "Brief's elapsed-time calculation is arithmetically inconsistent",
-          "matched_gold": null,
-          "counts_as": "FP"
-        }
-      ],
-      "ungrounded_evidence": [],
-      "uncertainty_handling": {
-        "F13": "correct (could_not_verify)",
-        "F14": "correct (could_not_verify)"
-      },
-      "stage_states": {
-        "CitationExtractor": "ok",
-        "CitationVerifier": "ok",
-        "QuoteChecker": "ok",
-        "CrossDocChecker": "ok",
-        "DeadlineChecker": "ok",
-        "ConfidenceAdjudicator": "ok",
-        "JudicialMemoWriter": "ok"
-      }
-    },
-    {
-      "recall": 0.833,
-      "precision": 0.81,
-      "hallucination_rate": 0.0,
-      "findings_emitted": 21,
-      "duplicates_marked": 2,
-      "backfill_excluded": 0,
-      "per_gold_credit": {
-        "F1": 1.0,
-        "F2": 1.0,
-        "F3": 1.0,
-        "F4": 1.0,
-        "F5": 1.0,
-        "F6": 1.0,
-        "F7": 1.0,
-        "F8": 1.0,
-        "F9": 1.0,
-        "F10": 0.0,
-        "F11": 0.0,
-        "F12": 1.0
-      },
-      "per_finding": [
-        {
-          "finding_id": "finding-14",
-          "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: a workplace incident on March 14, 2021",
-          "matched_gold": "F1",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-17",
-          "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: Rivera was not wearing required personal protective equipment at the time of the",
-          "matched_gold": "F2",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-24",
-          "category": "misleading_framing",
-          "title": "Time-barred heading contradicted by timely filing under SOL",
-          "matched_gold": "F12",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-24",
-          "category": "misleading_framing",
-          "title": "Time-barred heading contradicted by timely filing under SOL",
-          "matched_gold": "F12",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-12",
-          "category": "doctored_quote",
-          "title": "Quotation attributed to Privette v. Superior Court appears doctored",
-          "matched_gold": "F5",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-20",
-          "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: Apex Staffing Solutions \u00e2\u20ac\u201d not Harmon \u00e2\u20ac\u201d was the employer responsible for scaf",
-          "matched_gold": "F3",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-2",
-          "category": "mischaracterized_holding",
-          "title": "Authority does not support the stated proposition: Privette v. Superior Court",
-          "matched_gold": "F5",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-4",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be located: Kellerman v. Pacific Coast Construction, Inc.",
-          "matched_gold": "F7",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-3",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be located: Whitmore v. Delgado Scaffolding Co.",
-          "matched_gold": "F8",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-28",
-          "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: Rivera did not file his complaint until March 10, 2023 \u00e2\u20ac\u201d one year and 362 days",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-22",
-          "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: Rivera has presented no evidence to rebut this presumption.",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-5",
-          "category": "mischaracterized_holding",
-          "title": "Authority does not support the stated proposition: Seabright Insurance Co. v. US Airways, Inc.",
-          "matched_gold": "F6",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-23",
-          "category": "cross_document_contradiction",
-          "title": "Brief claim contradicted by case file: Harmon's unblemished OSHA inspection record demonstrates that its safety practic",
-          "matched_gold": "F4",
-          "counts_as": "TP"
-        },
-        {
-          "finding_id": "finding-19",
-          "category": "unsupported_assertion",
-          "title": "Claim asserted without record support: Rivera filed the instant action on March 10, 2023.",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-15",
-          "category": "unsupported_assertion",
-          "title": "Claim asserted without record support: a licensed subcontractor retained by Harmon for scaffolding assembly and related",
-          "matched_gold": null,
-          "counts_as": "FP"
-        },
-        {
-          "finding_id": "finding-6",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be located: Torres v. Granite Falls Dev. Corp.",
           "matched_gold": "F9",
           "counts_as": "TP"
         },
@@ -805,26 +691,174 @@
           "title": "Cited authority could not be located: Okafor v. Brightline Builders, Inc.",
           "matched_gold": "F9",
           "counts_as": "TP"
-        },
+        }
+      ],
+      "ungrounded_evidence": [],
+      "uncertainty_handling": {
+        "F13": "correct (could_not_verify)",
+        "F14": "correct (could_not_verify)"
+      },
+      "stage_states": {
+        "CitationExtractor": "ok",
+        "CitationVerifier": "ok",
+        "QuoteChecker": "ok",
+        "CrossDocChecker": "ok",
+        "DeadlineChecker": "ok",
+        "ConfidenceAdjudicator": "ok",
+        "JudicialMemoWriter": "ok"
+      },
+      "llm_usage": {
+        "logical_calls": 7,
+        "api_attempts_reserved": 7,
+        "input_tokens": 27449,
+        "output_tokens": 25468,
+        "reasoning_tokens": 10341,
+        "total_tokens": 52917,
+        "model_override": null,
+        "effort_override": null,
+        "timeout_s": 180.0,
+        "max_output_tokens": 16000
+      }
+    },
+    {
+      "recall": 1.0,
+      "precision": 0.824,
+      "hallucination_rate": 0.0,
+      "findings_emitted": 17,
+      "duplicates_marked": 0,
+      "backfill_excluded": 0,
+      "per_gold_credit": {
+        "F1": 1.0,
+        "F2": 1.0,
+        "F3": 1.0,
+        "F4": 1.0,
+        "F5": 1.0,
+        "F6": 1.0,
+        "F7": 1.0,
+        "F8": 1.0,
+        "F9": 1.0,
+        "F10": 1.0,
+        "F11": 1.0,
+        "F12": 1.0
+      },
+      "per_finding": [
         {
-          "finding_id": "finding-10",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be located: Nguyen v. Allied Pacific Construction Co.",
-          "matched_gold": "F9",
+          "finding_id": "finding-14",
+          "category": "cross_document_contradiction",
+          "title": "Brief gives March 14 incident date, but case file gives March 12",
+          "matched_gold": "F1",
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-7",
-          "category": "fabricated_citation",
-          "title": "Cited authority could not be located: Blackwell v. Sunrise Contractors, Inc.",
-          "matched_gold": "F9",
+          "finding_id": "finding-16",
+          "category": "cross_document_contradiction",
+          "title": "Fact 3 gives March 14 incident date, but case file gives March 12",
+          "matched_gold": "F1",
           "counts_as": "TP"
         },
         {
-          "finding_id": "finding-11",
+          "finding_id": "finding-27",
+          "category": "cross_document_contradiction",
+          "title": "Limitations section gives March 14 incident date, but case file gives March 12",
+          "matched_gold": "F1",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-17",
+          "category": "cross_document_contradiction",
+          "title": "Brief says Rivera lacked required PPE, but case file says he wore PPE and a harness",
+          "matched_gold": "F2",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-22",
+          "category": "cross_document_contradiction",
+          "title": "Brief says there is no rebuttal evidence, but file contains safety-defect evidence",
+          "matched_gold": "F4",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-20",
+          "category": "cross_document_contradiction",
+          "title": "Brief's no-Harmon-responsibility framing conflicts with evidence of Harmon direction and safety involvement",
+          "matched_gold": "F3",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-12",
+          "category": "doctored_quote",
+          "title": "Quotation attributed to Privette appears doctored",
+          "matched_gold": "F5",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-5",
+          "category": "mischaracterized_holding",
+          "title": "SeaBright does not establish an OSHA-compliance presumption",
+          "matched_gold": "F6",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-2",
+          "category": "mischaracterized_holding",
+          "title": "Authority does not support the stated Privette proposition",
+          "matched_gold": "F6",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-4",
           "category": "fabricated_citation",
-          "title": "Cited authority could not be located: Reeves v. Summit Engineering Group",
-          "matched_gold": "F9",
+          "title": "Cited authority could not be located: Kellerman v. Pacific Coast Construction, Inc.",
+          "matched_gold": "F7",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-3",
+          "category": "fabricated_citation",
+          "title": "Cited authority could not be located: Whitmore v. Delgado Scaffolding Co.",
+          "matched_gold": "F8",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-28",
+          "category": "cross_document_contradiction",
+          "title": "Elapsed-time calculation conflicts with the sourced incident date",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-deadline",
+          "category": "misleading_framing",
+          "title": "Time-barred heading is undermined by the section's concession that filing is nominally within the limitations window",
+          "matched_gold": "F12",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-24",
+          "category": "unsupported_assertion",
+          "title": "Unsupported record assertion that Rivera had over eight years of commercial-construction experience",
+          "matched_gold": "F10",
+          "counts_as": "TP"
+        },
+        {
+          "finding_id": "finding-15",
+          "category": "unsupported_assertion",
+          "title": "Unsupported record assertion that Apex was licensed and retained by Harmon",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-19",
+          "category": "unsupported_assertion",
+          "title": "Unsupported record assertion that Rivera filed the action on March 10, 2023",
+          "matched_gold": null,
+          "counts_as": "FP"
+        },
+        {
+          "finding_id": "finding-1",
+          "category": "unsupported_assertion",
+          "title": "Legal arguments advanced without supporting authority",
+          "matched_gold": "F11",
           "counts_as": "TP"
         }
       ],
@@ -841,26 +875,38 @@
         "DeadlineChecker": "ok",
         "ConfidenceAdjudicator": "ok",
         "JudicialMemoWriter": "ok"
+      },
+      "llm_usage": {
+        "logical_calls": 7,
+        "api_attempts_reserved": 7,
+        "input_tokens": 25054,
+        "output_tokens": 27179,
+        "reasoning_tokens": 13007,
+        "total_tokens": 52233,
+        "model_override": null,
+        "effort_override": null,
+        "timeout_s": 180.0,
+        "max_output_tokens": 16000
       }
     }
   ],
   "aggregate": {
-    "recall": 0.933,
-    "precision": 0.85,
+    "recall": 0.983,
+    "precision": 0.805,
     "hallucination_rate": 0.0
   },
   "llm_usage": {
-    "max_api_calls": 5,
-    "logical_calls": 5,
-    "api_attempts_reserved": 5,
+    "max_api_calls": 35,
+    "logical_calls": 35,
+    "api_attempts_reserved": 35,
     "sdk_max_retries": 0,
     "timeout_s": 180.0,
     "max_output_tokens": 16000,
     "model_override": null,
     "effort_override": null,
-    "input_tokens": 15050,
-    "output_tokens": 10511,
-    "reasoning_tokens": 9721,
-    "total_tokens": 25561
+    "input_tokens": 126970,
+    "output_tokens": 139105,
+    "reasoning_tokens": 68711,
+    "total_tokens": 266075
   }
 }

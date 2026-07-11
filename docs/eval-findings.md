@@ -8,49 +8,53 @@ cd backend
 python run_evals.py --runs 5 --max-api-calls 35
 ```
 
-`BSD_LLM_CACHE` was unset. Every stage (including the new deterministic `DeadlineChecker`) was `ok` on every run. Raw reports: `backend/evals/report-run{1..5}.json`. Auditable scores and finding→gold mappings: `backend/evals/results.json`.
+`BSD_LLM_CACHE` was unset. Every stage (including the deterministic `DeadlineChecker`) was `ok` on every run. Raw reports: `backend/evals/report-run{1..5}.json`. Auditable scores and finding→gold mappings: `backend/evals/results.json` (`llm_usage.max_api_calls: 35`, `logical_calls: 35`, per-run `llm_usage` non-null — one untainted live session).
 
 ## Headline metrics (5 runs)
 
-| Run | Recall | Precision | Hallucination |
-|-----|--------|-----------|---------------|
-| 1 | 1.000 | 0.824 | 0.000 |
-| 2 | 1.000 | 0.895 | 0.000 |
-| 3 | 0.833 | 0.857 | 0.000 |
-| 4 | 1.000 | 0.864 | 0.000 |
-| 5 | 0.833 | 0.810 | 0.000 |
-| **Mean ± std** | **0.933 ± 0.091** | **0.850 ± 0.034** | **0.000 ± 0.000** |
+| Run | Recall | Precision | Ungrounded evidence |
+|-----|--------|-----------|---------------------|
+| 1 | 1.000 | 0.765 | 0.000 |
+| 2 | 1.000 | 0.750 | 0.000 |
+| 3 | 0.917 | 0.769 | 0.000 |
+| 4 | 1.000 | 0.917 | 0.000 |
+| 5 | 1.000 | 0.824 | 0.000 |
+| **Mean ± std** | **0.983 ± 0.037** | **0.805 ± 0.069** | **0.000 ± 0.000** |
 
-Published headline: **93.3% ± 9.1% recall / 85.0% ± 3.4% precision / 0% hallucination**.
+Published headline: **98.3% ± 3.7% recall / 80.5% ± 6.9% precision / 0% ungrounded-evidence rate**.
 
-Prior 3-run baseline (before DeadlineChecker + precision fixes): 80.6% ± 8.6% recall / 73.0% precision / 0% hallucination.
+**Integrity correction.** A prior published 85.0% precision was inflated: DeadlineChecker was renumbered with `finding-{len(findings)+1}`, which ignored CNV sequence consumption and collided (e.g. two `finding-19` rows on an earlier run 2), so F12 was counted as a TP twice. Fixed by keeping the stable `finding-deadline` id. These numbers are from a fresh live session after that fix — lower precision, correct accounting. Every report uses exactly one `finding-deadline`; no duplicate finding IDs.
+
+"Ungrounded-evidence rate" (JSON key `hallucination_rate`) is a mechanical check that every evidence quote appears in the cited document — not a semantic hallucination score.
+
+Prior 3-run baseline (before DeadlineChecker + precision fixes): 80.6% ± 8.6% recall / 73.0% precision / 0% ungrounded-evidence.
 
 ## Per-flaw credit (mean over 5 runs)
 
 | Flaw | Mean credit | Per-run |
 |------|-------------|---------|
 | F1 | 1.00 | 1,1,1,1,1 |
-| F2 | 0.80 | 1,1,0,1,1 |
-| F3 | 0.80 | 1,1,0,1,1 |
-| F4 | 1.00 | 1,1,1,1,1 |
+| F2 | 1.00 | 1,1,1,1,1 |
+| F3 | 1.00 | 1,1,1,1,1 |
+| F4 | 0.80 | 1,1,0,1,1 |
 | F5 | 1.00 | 1,1,1,1,1 |
 | F6 | 1.00 | 1,1,1,1,1 |
 | F7 | 1.00 | 1,1,1,1,1 |
 | F8 | 1.00 | 1,1,1,1,1 |
 | F9 | 1.00 | 1,1,1,1,1 |
-| F10 | 0.80 | 1,1,1,1,0 |
-| F11 | 0.80 | 1,1,1,1,0 |
+| F10 | 1.00 | 1,1,1,1,1 |
+| F11 | 1.00 | 1,1,1,1,1 |
 | F12 | 1.00 | 1,1,1,1,1 |
 
-F12 was 0.0 on every prior run; the deterministic `DeadlineChecker` now catches it every time (pure date math on the self-defeating Time-Barred section).
+F12 was 0.0 on every pre-DeadlineChecker run; the deterministic checker now catches it every time (pure date math on the self-defeating Time-Barred section), counted once per run after the ID fix.
 
 ## Honest notes
 
-- **F10 / F11 on run 5.** Missed once. Inspection of `report-run5.json`: CrossDocChecker never extracted the "eight years" tenure claim (not routed to `could_not_verify` either), and CitationExtractor emitted zero uncited assertions that run. Not a DeadlineChecker regression; not the unsupported-criteria guardrail misclassifying tenure (runs 1–4 still credit F10 at 1.0, with state-of-mind boilerplate correctly in CNV).
-- **F2 / F3 on run 3.** One-run miss on PPE / Harmon-involvement contradictions — LLM variance in CrossDocChecker, unchanged by this pass.
-- **F13.** Correctly `could_not_verify` on all five runs here. A prior historical 3-run session once flagged it as a flaw; documented, not chased.
-- **Precision traps (P6 / P10).** Gold negatives intentionally penalize over-flagging employment boilerplate and similar true statements. The CrossDocChecker guardrail routes subjective state-of-mind / acceptance boilerplate to `could_not_verify` instead of `unsupported`, which is the main precision lift alongside merging duplicate uncited-assertion findings in assembly.
-- **Dedup merge.** When CitationExtractor returns multiple uncited legal assertions, assembly now emits one merged `unsupported_assertion` finding (verbatim evidence quote per assertion) instead of near-duplicate "without supporting authority" rows that dragged precision.
-- **DeadlineChecker rationale.** F12 is internal incoherence (heading vs body date math), not a cross-doc or citation problem. No LLM can be trusted to catch it reliably; a 15-line pure function can. Same philosophy as the reporter-year sanity check in CitationVerifier.
-- **CourtListener deliberately omitted.** Prototype has no legal database. Fabricated-citation credit accepts honest `could_not_verify` or `likely_fabricated`; inventing a holding is what gets punished. Wiring CourtListener would be the first production upgrade (see `docs/production-readiness.md`), not a silent prototype dependency.
-- **Provenance.** All numbers above come from live uncached pipeline runs (`BSD_LLM_CACHE` unset). Offline `--report` rescoring is deterministic-only (no judge) and understates recall for fact-level gold items — use it to audit grounding/citation matches, not as the published score.
+- **F4 on run 3.** One-run miss on the "no rebuttal evidence" contradiction — LLM variance in CrossDocChecker.
+- **Precision variance.** Runs 1–3 sit in the mid-70s; run 4 hits 0.917. Mean 80.5% is the honest post-fix number — not the inflated 85.0%.
+- **F13 / F14.** Correctly `could_not_verify` on all five runs.
+- **Precision traps (P6 / P10).** Gold negatives intentionally penalize over-flagging employment boilerplate and similar true statements. The CrossDocChecker guardrail routes subjective state-of-mind / acceptance boilerplate to `could_not_verify` instead of `unsupported`.
+- **Dedup merge.** When CitationExtractor returns multiple uncited legal assertions, assembly emits one merged `unsupported_assertion` finding (verbatim evidence quote per assertion).
+- **DeadlineChecker rationale.** F12 is internal incoherence (heading vs body date math), not a cross-doc or citation problem. Same philosophy as the reporter-year sanity check in CitationVerifier.
+- **CourtListener deliberately omitted.** Prototype has no legal database. Fabricated-citation credit accepts honest `could_not_verify` or `likely_fabricated`; inventing a holding is what gets punished.
+- **Provenance.** All numbers above come from one live uncached session (`BSD_LLM_CACHE` unset, `--max-api-calls 35`, 35 logical calls). Offline `--report` writes `results-offline-*.json` and never overwrites live `results.json`.

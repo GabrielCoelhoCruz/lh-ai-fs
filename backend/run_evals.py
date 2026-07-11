@@ -14,10 +14,12 @@ ground-truth gold set (evals/gold.json). Three headline metrics:
 - precision     — of the findings the pipeline emitted, how many correspond
                   to real flaws. Findings that flag true statements (the
                   gold set's negatives / precision traps) count against it.
-- hallucination — fraction of findings whose evidence quotes do NOT appear
-                  in the source documents. Checked mechanically, not by an
-                  LLM: a finding citing evidence that isn't in the file is a
-                  fabricated finding regardless of how plausible it sounds.
+- ungrounded-evidence rate (also labeled hallucination_rate in JSON for
+                  continuity) — fraction of findings whose evidence quotes
+                  do NOT appear in the source documents. Checked mechanically,
+                  not by an LLM: a finding citing evidence that isn't in the
+                  file is fabricated evidence regardless of how plausible it
+                  sounds. This is not a semantic "hallucination" score.
 
 Also reported: uncertainty handling — the two claims that cannot be checked
 against the file (OSHA inspection record, IIPP) must surface as
@@ -26,8 +28,9 @@ could-not-verify, not as flaw findings and not as silent omissions.
 Matching strategy: citation-level gold items are matched deterministically by
 case name; everything else is matched by an LLM judge during live pipeline
 runs. Offline rescoring (--report) is deterministic-only and never invokes the
-judge. Judge mistakes are possible on live runs; results.json records the full
-mapping so every score is auditable.
+judge; it writes evals/results-offline.json and never overwrites the live
+evals/results.json. Judge mistakes are possible on live runs; results.json
+records the full mapping so every score is auditable.
 
 Scoring conventions (decided up front, documented in gold.json):
 - For citations that do not exist, either "likely_fabricated" or an honest
@@ -122,7 +125,11 @@ def parse_args(argv: list[str] | None = None) -> EvalConfig:
         "--report",
         type=str,
         default=None,
-        help="score a saved report JSON instead of running the pipeline",
+        help=(
+            "score a saved report JSON instead of running the pipeline; "
+            "writes evals/results-offline-<stem>.json (never overwrites "
+            "evals/results.json)"
+        ),
     )
     ap.add_argument(
         "--smoke",
@@ -457,9 +464,17 @@ def _aggregate(results: list[dict], usage: dict | None) -> dict:
     }
 
 
-def _persist_results(results: list[dict], usage: dict | None) -> None:
-    if results:
-        _write_json(EVALS_DIR / "results.json", _aggregate(results, usage))
+def _persist_results(
+    results: list[dict],
+    usage: dict | None,
+    *,
+    path: Path | None = None,
+) -> Path | None:
+    if not results:
+        return None
+    out = path if path is not None else EVALS_DIR / "results.json"
+    _write_json(out, _aggregate(results, usage))
+    return out
 
 
 def score_offline(report_path: str, gold: dict, documents: dict) -> list[dict]:
@@ -467,7 +482,10 @@ def score_offline(report_path: str, gold: dict, documents: dict) -> list[dict]:
     report = VerificationReport.model_validate(raw.get("report", raw))
     print("[offline] scoring saved report; no API calls", flush=True)
     results = [score_report(report, gold, documents, use_judge=False)]
-    _persist_results(results, None)
+    stem = Path(report_path).stem
+    out = EVALS_DIR / f"results-offline-{stem}.json"
+    _persist_results(results, None, path=out)
+    print(f"[offline] wrote {out} (live results.json untouched)", flush=True)
     return results
 
 
@@ -541,13 +559,21 @@ def run_live(
     return results, usage_snapshot, 0
 
 
-def print_summary(results: list[dict], usage_snapshot: dict | None) -> None:
+def print_summary(
+    results: list[dict],
+    usage_snapshot: dict | None,
+    *,
+    detail_path: Path | None = None,
+) -> None:
     if not results:
         return
     agg = _aggregate(results, usage_snapshot)
     print("\n=== BS Detector eval results ===")
     for metric, value in agg["aggregate"].items():
-        print(f"  {metric:20s} {value:.1%}")
+        label = metric
+        if metric == "hallucination_rate":
+            label = "ungrounded_evidence"
+        print(f"  {label:20s} {value:.1%}")
     last_result = results[-1]
     print(
         f"  findings emitted     {last_result['findings_emitted']} "
@@ -560,7 +586,7 @@ def print_summary(results: list[dict], usage_snapshot: dict | None) -> None:
     for gold_id, verdict in last_result["uncertainty_handling"].items():
         print(f"    {gold_id:4s} {verdict}")
     if last_result["ungrounded_evidence"]:
-        print("\n  UNGROUNDED EVIDENCE (hallucinations):")
+        print("\n  UNGROUNDED EVIDENCE (mechanical quote check):")
         for ungrounded in last_result["ungrounded_evidence"]:
             print(
                 f"    {ungrounded['finding_id']}: "
@@ -577,7 +603,8 @@ def print_summary(results: list[dict], usage_snapshot: dict | None) -> None:
             f"reasoning={usage_snapshot['reasoning_tokens']} "
             f"total={usage_snapshot['total_tokens']}"
         )
-    print(f"\n  full detail: {EVALS_DIR / 'results.json'}")
+    path = detail_path if detail_path is not None else EVALS_DIR / "results.json"
+    print(f"\n  full detail: {path}")
 
 
 def _configure_progress_logging() -> None:
@@ -598,7 +625,12 @@ def main(argv: list[str] | None = None) -> int:
 
     if config.report:
         results = score_offline(config.report, gold, documents)
-        print_summary(results, None)
+        stem = Path(config.report).stem
+        print_summary(
+            results,
+            None,
+            detail_path=EVALS_DIR / f"results-offline-{stem}.json",
+        )
         return 0
 
     _configure_progress_logging()

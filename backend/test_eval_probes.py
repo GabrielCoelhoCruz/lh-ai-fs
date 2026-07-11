@@ -1,12 +1,13 @@
 """Offline scoring probes for eval harness fixes (no LLM required)."""
 
+import hashlib
 import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from run_evals import score_report
+from run_evals import EVALS_DIR, score_offline, score_report
 from schemas import (
     AdjudicatedFinding,
     EvidenceQuote,
@@ -157,12 +158,36 @@ def test_offline_skips_judge():
     assert result["per_finding"][0]["counts_as"] == "FP"
 
 
+def test_offline_report_does_not_overwrite_results_json():
+    """--report must write results-offline-*.json, never clobber results.json."""
+    live = EVALS_DIR / "results.json"
+    before = live.read_bytes() if live.exists() else None
+    before_hash = hashlib.sha256(before).hexdigest() if before else None
+
+    report = EVALS_DIR / "report-run1.json"
+    assert report.exists(), "committed report-run1.json required for this probe"
+
+    offline_out = EVALS_DIR / "results-offline-report-run1.json"
+    if offline_out.exists():
+        offline_out.unlink()
+
+    score_offline(str(report), GOLD, DOCUMENTS)
+
+    assert offline_out.exists()
+    after = live.read_bytes() if live.exists() else None
+    after_hash = hashlib.sha256(after).hexdigest() if after else None
+    assert after_hash == before_hash, "live results.json must be untouched by --report"
+
+    offline_out.unlink(missing_ok=True)
+
+
 def main() -> int:
     test_f10_cnv_credit()
     test_f9_fractional_requires_category()
     test_unknown_doc_counts_as_hallucination()
     test_backfilled_cnv_does_not_earn_credit()
     test_offline_skips_judge()
+    test_offline_report_does_not_overwrite_results_json()
     print("All eval probe tests passed.")
     return 0
 

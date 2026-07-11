@@ -137,6 +137,24 @@ def _skip_stage(name: str, reason: str, stages: list[StageStatus]) -> None:
     stages.append(StageStatus(name=name, state="skipped", error=reason, duration_ms=0))
 
 
+def _assert_unique_finding_ids(
+    findings: list[AdjudicatedFinding] | list[Finding],
+    cnv: list[Finding],
+) -> None:
+    """Raise if any finding_id appears more than once across findings + CNV."""
+    ids = [f.finding_id for f in findings] + [f.finding_id for f in cnv]
+    seen: set[str] = set()
+    dupes: set[str] = set()
+    for fid in ids:
+        if fid in seen:
+            dupes.add(fid)
+        seen.add(fid)
+    if dupes:
+        raise RuntimeError(
+            "duplicate finding_id(s) in report: " + ", ".join(sorted(dupes))
+        )
+
+
 def _pipeline_status(
     stages: list[StageStatus],
     findings: list[AdjudicatedFinding],
@@ -146,7 +164,8 @@ def _pipeline_status(
 
     Ungrounded drops happen before adjudication; status uses post-adjudication
     findings plus CNV. Core failure = both CitationExtractor and CrossDocChecker
-    failed, or no output with any stage failure.
+    failed, or no output with any stage failure. Empty citation extraction
+    (verifier/quote stages skipped with "no citations found") is partial.
     """
     by_name = {s.name: s for s in stages}
     extract = by_name.get("CitationExtractor")
@@ -159,10 +178,13 @@ def _pipeline_status(
     )
     has_output = bool(findings) or bool(cnv)
     any_failed = any(s.state == "failed" for s in stages)
+    empty_extraction = any(
+        s.state == "skipped" and s.error == "no citations found" for s in stages
+    )
 
     if core_both_failed or (not has_output and any_failed):
         return "failed"
-    if any_failed:
+    if any_failed or empty_extraction:
         return "partial"
     return "complete"
 
@@ -249,12 +271,11 @@ def _execute_pipeline(
 
     findings, cnv, assembly_notes = assemble(citations, verification, quotes, facts)
     annotate_stage_notes(stages, assembly_notes)
+    # Keep DeadlineChecker's stable id (finding-deadline). Do NOT renumber with
+    # len(findings)+1 — assemble's sequence also covers CNV entries, so that
+    # stamp can collide and double-count TPs in the eval scorer.
     if isinstance(deadline, Finding):
-        findings.append(
-            deadline.model_copy(
-                update={"finding_id": f"finding-{len(findings) + 1}"}
-            )
-        )
+        findings.append(deadline)
     findings, dropped_ungrounded = filter_ungrounded(findings, documents)
 
     if findings:
@@ -268,6 +289,8 @@ def _execute_pipeline(
     else:
         adjudicated = []
         _skip_stage("ConfidenceAdjudicator", "no findings to adjudicate", stages)
+
+    _assert_unique_finding_ids(adjudicated, cnv)
 
     live = [f for f in adjudicated if f.duplicate_of is None]
     if live:

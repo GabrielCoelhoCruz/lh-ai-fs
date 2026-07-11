@@ -352,6 +352,51 @@ def test_pipeline_status_failed():
     assert _pipeline_status(stages, [], []) == "failed"
 
 
+def test_pipeline_status_empty_extraction_is_partial():
+    stages = [
+        StageStatus(
+            name="CitationExtractor", state="ok", error=None, duration_ms=10
+        ),
+        StageStatus(
+            name="CitationVerifier",
+            state="skipped",
+            error="no citations found",
+            duration_ms=0,
+        ),
+        StageStatus(
+            name="QuoteChecker",
+            state="skipped",
+            error="no citations found",
+            duration_ms=0,
+        ),
+        StageStatus(
+            name="CrossDocChecker", state="ok", error=None, duration_ms=10
+        ),
+    ]
+    assert _pipeline_status(stages, [_finding("f1")], []) == "partial"
+
+
+def test_pipeline_status_no_quotes_skip_stays_complete():
+    stages = [
+        StageStatus(
+            name="CitationExtractor", state="ok", error=None, duration_ms=10
+        ),
+        StageStatus(
+            name="CitationVerifier", state="ok", error=None, duration_ms=10
+        ),
+        StageStatus(
+            name="QuoteChecker",
+            state="skipped",
+            error="no direct quotes in brief",
+            duration_ms=0,
+        ),
+        StageStatus(
+            name="CrossDocChecker", state="ok", error=None, duration_ms=10
+        ),
+    ]
+    assert _pipeline_status(stages, [_finding("f1")], []) == "complete"
+
+
 def main() -> int:
     test_sanitize_restores_missing_and_clamps()
     test_sanitize_restores_omitted()
@@ -370,6 +415,8 @@ def main() -> int:
     test_assemble_backfill_marks_backfilled()
     test_truncated_stage_fails_without_retry()
     test_pipeline_status_failed()
+    test_pipeline_status_empty_extraction_is_partial()
+    test_pipeline_status_no_quotes_skip_stays_complete()
     print("All orchestrator probe tests passed.")
     return 0
 
