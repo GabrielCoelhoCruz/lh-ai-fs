@@ -1,0 +1,996 @@
+{
+  "case_caption": "Case No. BC-2023-04851",
+  "document_analyzed": "motion_for_summary_judgment",
+  "pipeline_status": "complete",
+  "findings": [
+    {
+      "finding_id": "finding-16",
+      "category": "cross_document_contradiction",
+      "severity": "high",
+      "title": "Brief's March 14 scaffolding-incident date is contradicted by March 12 records",
+      "description": "The scaffolding-gave-way portion is corroborated, but every source document dates the incident to March 12, 2021. Rivera also underwent surgery on March 13, 2021, which makes a March 14 accident date impossible.",
+      "brief_location": "Section II, Fact 3",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "On or about March 14, 2021, Rivera was working on a scaffolding assembly at the project site when a section of the scaffolding gave way."
+        },
+        {
+          "document": "medical_records_excerpt",
+          "quote": "Patient was brought in by LAFD paramedics following a workplace accident occurring at approximately 10:45 AM on March 12, 2021."
+        },
+        {
+          "document": "medical_records_excerpt",
+          "quote": "Patient was working on scaffolding at a commercial construction site when the structure gave way."
+        },
+        {
+          "document": "police_report",
+          "quote": "Date of Incident:  March 12, 2021"
+        },
+        {
+          "document": "medical_records_excerpt",
+          "quote": "He underwent intramedullary nailing of the left tibial shaft fracture on March 13, 2021."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.99,
+      "confidence_reasoning": "The motion says the accident occurred on or about March 14, while the medical record and police report both date the workplace accident to March 12, and surgery occurred on March 13. Those records make the date conflict direct and mechanically checkable.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-14",
+      "category": "cross_document_contradiction",
+      "severity": "high",
+      "title": "Brief's March 14 incident date is contradicted by March 12 records",
+      "description": "The location is corroborated, but the date is contradicted. The medical and police records place the accident on March 12, 2021, and the medical admission occurred that same day, making a March 14 incident date incompatible.",
+      "brief_location": "Section I, Introduction",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "This action arises from a workplace incident on March 14, 2021, at a commercial construction site located at 2200 West Olympic Boulevard, Los Angeles, California."
+        },
+        {
+          "document": "medical_records_excerpt",
+          "quote": "DATE OF ADMISSION:  March 12, 2021"
+        },
+        {
+          "document": "medical_records_excerpt",
+          "quote": "Patient was brought in by LAFD paramedics following a workplace accident occurring at approximately 10:45 AM on March 12, 2021."
+        },
+        {
+          "document": "police_report",
+          "quote": "Date of Incident:  March 12, 2021"
+        },
+        {
+          "document": "police_report",
+          "quote": "Location:          2200 West Olympic Boulevard, Los Angeles, CA 90006"
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.98,
+      "confidence_reasoning": "The brief states March 14, while both the medical records and police report state March 12, and the medical admission is also March 12. This is a direct, mechanically checkable date conflict, but it is marked duplicate because the same incident-date defect is captured more fully in finding-16.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-17",
+      "category": "cross_document_contradiction",
+      "severity": "high",
+      "title": "Brief's no-PPE claim is contradicted by police and witness records",
+      "description": "The brief says Rivera was not wearing required PPE, including fall-arrest equipment. The police report and witness statement both say he was wearing a hard hat and harness, and both explain that the lanyard came free because the anchor point was part of the collapsed scaffolding.",
+      "brief_location": "Section II, Fact 4",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Rivera was not wearing required personal protective equipment at the time of the incident, including fall-arrest equipment mandated by site safety protocols."
+        },
+        {
+          "document": "police_report",
+          "quote": "Site supervisor Mark Ellison confirmed that Rivera was wearing a hard hat and harness consistent with site requirements at the time of the collapse."
+        },
+        {
+          "document": "police_report",
+          "quote": "The harness lanyard was found still attached to Rivera but had pulled free from the scaffolding anchor point when the structure gave way."
+        },
+        {
+          "document": "witness_statement",
+          "quote": "Carlos was wearing his hard hat, safety harness, and high-visibility vest, consistent with site PPE requirements."
+        },
+        {
+          "document": "witness_statement",
+          "quote": "His harness was still on, but the lanyard had come free \u00e2\u20ac\u201d the anchor point it was attached to was part of the scaffolding that collapsed."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.98,
+      "confidence_reasoning": "The brief says Rivera lacked required PPE, including fall-arrest equipment, while both police and witness records state he wore a hard hat and harness and explain why the lanyard detached. The contradiction is direct and supported by multiple independent record quotes.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-18",
+      "category": "misleading_framing",
+      "severity": "high",
+      "title": "Time-bar heading is undermined by the brief's concession that filing was nominally within two years",
+      "description": "The section heading asserts the claims are time-barred, but the body concedes the filing falls within this window under the statute of limitations (CCP 335.1 / two years = 730 days). Filing on 2023-03-10 is 726 days after the incident on 2021-03-14, which is inside the 730-day window. The time-barred framing is therefore self-defeating.",
+      "brief_location": "Section III.D (Time-Barred)",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "D. Rivera's Claims Are Time-Barred"
+        },
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "While Rivera's filing falls nominally within this window, Harmon reserves the right to challenge the accrual date based on Rivera's own knowledge of his injuries, which the medical records indicate were immediately apparent."
+        }
+      ],
+      "source_agent": "DeadlineChecker",
+      "confidence": 0.95,
+      "confidence_reasoning": "The brief's own body text says the filing 'falls nominally within this window,' directly undercutting the categorical 'time-barred' heading. The two-year limitations arithmetic is straightforward, though the brief's reservation about accrual leaves a narrow argumentative caveat.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-28",
+      "category": "cross_document_contradiction",
+      "severity": "high",
+      "title": "Complaint-timing assertion relies on unsupported filing date and inconsistent elapsed-time calculation",
+      "description": "No supplied source verifies the complaint filing date, and the elapsed-time calculation is inconsistent with the source-documented incident date. From March 12, 2021 to March 10, 2023 is 728 days, i.e., one year and 363 days; even using the brief's March 14 date gives 726 days, i.e., one year and 361 days, not one year and 362 days.",
+      "brief_location": "Section III.D, Argument",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Rivera did not file his complaint until March 10, 2023 \u00e2\u20ac\u201d one year and 362 days after the incident."
+        },
+        {
+          "document": "medical_records_excerpt",
+          "quote": "Patient was brought in by LAFD paramedics following a workplace accident occurring at approximately 10:45 AM on March 12, 2021."
+        },
+        {
+          "document": "police_report",
+          "quote": "Date of Incident:  March 12, 2021"
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.9,
+      "confidence_reasoning": "The date arithmetic is mechanically checkable: March 12, 2021 to March 10, 2023 is 728 days, and March 14, 2021 to March 10, 2023 is 726 days, neither matching the brief's 'one year and 362 days.' Confidence is slightly reduced because the separate assertion that the filing date is unsupported depends on absence of a docket or complaint in the supplied file.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-12",
+      "category": "doctored_quote",
+      "severity": "high",
+      "title": "Quotation attributed to Privette v. Superior Court appears doctored",
+      "description": "Privette v. Superior Court is a real and well-known California Supreme Court case, but the quoted sentence's absolute term \u201cnever liable\u201d materially overstates the rule. Privette limited peculiar-risk vicarious liability to contractor employees; it did not establish a categorical immunity for all hirers in all circumstances arising from contracted work. Known actual language/rule: Privette holds that a hirer is generally not vicariously liable under the peculiar-risk doctrine for injuries to an independent contractor's employee arising from the contracted work, particularly because the employee is covered by workers' compensation. California law recognizes qualifications/exceptions, including retained-control affirmative contribution and concealed hazardous conditions in later Privette-line cases.",
+      "brief_location": "III.A",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "A hirer is never liable for injuries sustained by an independent contractor's employees when the injuries arise from the contracted work."
+        }
+      ],
+      "source_agent": "QuoteChecker",
+      "confidence": 0.86,
+      "confidence_reasoning": "The challenged sentence uses the absolute phrase 'never liable,' which is inconsistent with the canonical Privette-line rule and its later retained-control and concealed-hazard exceptions. The finding depends partly on legal knowledge rather than a supplied copy of Privette, but the doctrine is sufficiently well known to support high confidence.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-20",
+      "category": "cross_document_contradiction",
+      "severity": "high",
+      "title": "Record evidence undercuts claim that Apex alone was responsible for scaffolding safety",
+      "description": "The sources corroborate that Apex employed Rivera, but they undercut the framing that Harmon had no responsibility for scaffolding operations or safety. The police report and Tran statement say Harmon foreman Ray Donner directed the crew to work on the east-side scaffolding and was told about safety concerns before the collapse.",
+      "brief_location": "Section III.A, Argument",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Here, the undisputed facts establish that Apex Staffing Solutions \u00e2\u20ac\u201d not Harmon \u00e2\u20ac\u201d was the employer responsible for scaffolding operations and for ensuring its employees followed appropriate safety procedures."
+        },
+        {
+          "document": "police_report",
+          "quote": "Donner stated that he had directed Rivera and his crew to begin work on the east-side scaffolding section earlier that morning."
+        },
+        {
+          "document": "police_report",
+          "quote": "Tran stated that these concerns were communicated to both Ellison and Donner."
+        },
+        {
+          "document": "witness_statement",
+          "quote": "Ray Donner \u00e2\u20ac\u201d the project foreman for Harmon Construction \u00e2\u20ac\u201d told us that the east-side scaffolding section needed to be fully operational by end of day."
+        },
+        {
+          "document": "witness_statement",
+          "quote": "Donner told me, \"We don't have time to re-do the base. It's been fine. Just get up there and get it done.\""
+        },
+        {
+          "document": "witness_statement",
+          "quote": "I want to note that Donner had personally directed us to work on that section that morning and dismissed my concern about the base plate."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.84,
+      "confidence_reasoning": "The record quotes show Harmon foreman Donner directing the scaffolding work and allegedly dismissing a safety concern, which materially undercuts the brief's categorical 'Apex\u2014not Harmon' responsibility framing. Some legal interpretation remains because Apex could still have had employer safety duties, so the contradiction is strong but not absolute.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-5",
+      "category": "mischaracterized_holding",
+      "severity": "high",
+      "title": "Seabright does not support the brief's OSHA-insulation proposition",
+      "description": "Seabright is not principally a case about OSHA compliance being 'highly probative' of due care, and it does not hold that an unblemished inspection record insulates a hirer from tort liability. Its actual holding concerns delegation of workplace-safety duties to the independent contractor under Privette. The brief's use also omits that Privette remains a presumption subject to exceptions in appropriate cases.",
+      "brief_location": "III.B",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Seabright Insurance Co. v. US Airways, Inc., 52 Cal.4th 590, 598 (2011)."
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "confidence": 0.82,
+      "confidence_reasoning": "Seabright's Privette-delegation holding is a well-known California Supreme Court rule, and the brief's asserted OSHA-inspection insulation proposition is materially different. Confidence is capped below mechanical certainty because the evidence gives only the citation, not the full sentence surrounding it.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-4",
+      "category": "fabricated_citation",
+      "severity": "high",
+      "title": "Cited authority could not be verified: Kellerman v. Pacific Coast Construction, Inc.",
+      "description": "I do not recognize this Ninth Circuit case or the quoted OSHA-compliance presumption. There are concrete red flags: 887 F.2d appears to be a late-1980s Federal Reporter volume rather than a 1991 volume, and the quoted rule creating a rebuttable negligence presumption from OSHA compliance is suspiciously broad and not a familiar Ninth Circuit or California negligence rule. Jurisdiction concern: Even if real, a Ninth Circuit decision would not bind a California Superior Court on California negligence-law standards except as persuasive authority, and OSHA compliance would not necessarily control California tort duties.",
+      "brief_location": "III.B",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Kellerman v. Pacific Coast Construction, Inc., 887 F.2d 1204, 1209 (9th Cir. 1991) (\"Where an employer demonstrates full compliance with applicable OSHA standards, it is entitled to a rebuttable presumption that it met the standard of care in negligence.\")."
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "confidence": 0.52,
+      "confidence_reasoning": "The volume/year mismatch and broad quoted OSHA presumption are concrete red flags, and the quoted rule is not a familiar California or Ninth Circuit negligence rule. But the finding still lacks an actual database lookup or contrary reporter record, so confidence is moderate rather than high.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-22",
+      "category": "cross_document_contradiction",
+      "severity": "medium",
+      "title": "Record evidence contradicts assertion that Rivera presented no rebuttal evidence",
+      "description": "The source file includes plaintiff-side witness evidence and police-recorded observations of unsafe scaffold conditions and pre-incident safety concerns communicated to Harmon's foreman. That is incompatible with the categorical factual assertion that Rivera presented no evidence to rebut reasonable care.",
+      "brief_location": "Section III.B, Argument",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Rivera has presented no evidence to rebut this presumption."
+        },
+        {
+          "document": "witness_statement",
+          "quote": "The base plate on the far-east end was sitting on a piece of plywood rather than on a proper mudsill or stable footing."
+        },
+        {
+          "document": "witness_statement",
+          "quote": "Donner told me, \"We don't have time to re-do the base. It's been fine. Just get up there and get it done.\""
+        },
+        {
+          "document": "witness_statement",
+          "quote": "The scaffolding he was on was not in safe condition, and concerns about it had been raised before the collapse."
+        },
+        {
+          "document": "police_report",
+          "quote": "The base plates on the failed section appeared to be resting on uneven ground, with one plate sitting on a loose plywood sheet rather than a stable footing."
+        },
+        {
+          "document": "police_report",
+          "quote": "Tran stated that these concerns were communicated to both Ellison and Donner."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.91,
+      "confidence_reasoning": "The motion says Rivera presented no rebuttal evidence, while the file contains witness and police-recorded evidence of unstable scaffolding and communicated safety concerns. Whether that evidence legally rebuts a particular presumption may be arguable, but the categorical 'no evidence' assertion is directly undercut.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-2",
+      "category": "mischaracterized_holding",
+      "severity": "medium",
+      "title": "Brief overstates Privette v. Superior Court",
+      "description": "Privette supports a general presumption of hirer nonliability, but the asserted proposition and quoted text are materially overbroad. California law recognizes exceptions, including Hooker-style retained control that affirmatively contributes to injury and Kinsman-style concealed hazards; later decisions also discuss the scope of delegated statutory/regulatory duties. Presenting the doctrine as 'never liable' omits those controlling qualifications.",
+      "brief_location": "III.A",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Id. at 702."
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "confidence": 0.82,
+      "confidence_reasoning": "This is the same Privette overstatement addressed more completely in finding-12, which includes the actual challenged sentence rather than only an id. citation. Confidence is strong because the 'never liable' formulation conflicts with the canonical Privette-line exceptions, but the finding is marked duplicate because it targets the same underlying defect.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-23",
+      "category": "cross_document_contradiction",
+      "severity": "medium",
+      "title": "Record evidence undercuts claim that OSHA record proves fully compliant safety practices",
+      "description": "The source documents do not verify any OSHA inspection record, and they affirmatively describe unsafe scaffolding conditions at the site. Those descriptions conflict with the brief's assertion that Harmon's safety practices met or exceeded all regulatory requirements.",
+      "brief_location": "Section III.B, Argument",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Harmon's unblemished OSHA inspection record demonstrates that its safety practices met or exceeded all regulatory requirements, effectively insulating it from tort liability predicated on alleged safety failures at the site."
+        },
+        {
+          "document": "police_report",
+          "quote": "Several cross-braces were found detached on the ground."
+        },
+        {
+          "document": "police_report",
+          "quote": "The base plates on the failed section appeared to be resting on uneven ground, with one plate sitting on a loose plywood sheet rather than a stable footing."
+        },
+        {
+          "document": "police_report",
+          "quote": "Officers observed that portions of the scaffolding in the affected section showed visible rust and wear."
+        },
+        {
+          "document": "witness_statement",
+          "quote": "The base plate on the far-east end was sitting on a piece of plywood rather than on a proper mudsill or stable footing."
+        },
+        {
+          "document": "witness_statement",
+          "quote": "The scaffolding he was on was not in safe condition, and concerns about it had been raised before the collapse."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.78,
+      "confidence_reasoning": "The police and witness quotes describe specific unsafe scaffold conditions, which undercut the assertion that site safety practices met or exceeded all requirements. The contradiction is not perfectly mechanical because an unblemished OSHA inspection record could theoretically coexist with uninspected or later-arising unsafe conditions, and no OSHA record is supplied either way.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-15",
+      "category": "unsupported_assertion",
+      "severity": "medium",
+      "title": "Unsupported record assertions about Apex's license and retention by Harmon",
+      "description": "The source documents corroborate that Rivera was employed by Apex and that Apex personnel performed scaffolding work, but they do not state that Apex was licensed or that Apex was retained by Harmon. Those additional assertions are record-checkable but not supported by the provided file.",
+      "brief_location": "Section II, Fact 2",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Rivera was employed by Apex Staffing Solutions, a licensed subcontractor retained by Harmon for scaffolding assembly and related work."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.68,
+      "confidence_reasoning": "The quoted brief assertion includes the specific unsupported details\u2014'licensed' and 'retained by Harmon'\u2014but the evidence supplied here does not include the underlying source documents proving their absence. The finding is reasonably supported by the agent's record review, though not mechanically verifiable from the single quote alone.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-24",
+      "category": "unsupported_assertion",
+      "severity": "medium",
+      "title": "Unsupported assertion about Rivera's eight years of experience",
+      "description": "The police report corroborates Rivera's occupation as a journeyman scaffolder, but none of the supplied documents states that he had over eight years of experience in commercial construction. The specific tenure claim is unsupported.",
+      "brief_location": "Section III.C, Argument",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Rivera is a journeyman scaffolder with over eight years of experience in commercial construction."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.67,
+      "confidence_reasoning": "The quoted assertion contains the specific tenure claim, but the evidence here does not include the police report or other source documents showing that only the occupation was corroborated. The unsupported-status conclusion is plausible from the record review but not mechanically verifiable from the supplied quote alone.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-19",
+      "category": "unsupported_assertion",
+      "severity": "medium",
+      "title": "Unsupported complaint filing date",
+      "description": "No complaint, civil case filing record, docket, or other source document in the provided file states the complaint filing date. The claim is record-checkable but not supported by the supplied documents.",
+      "brief_location": "Section II, Fact 6",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Rivera filed the instant action on March 10, 2023."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.66,
+      "confidence_reasoning": "The only quoted support is the motion's own assertion of the filing date, and the finding reports that no docket, complaint, or filing record was supplied. Because absence of support cannot be confirmed from the quoted evidence alone, confidence is moderate rather than mechanical.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-1",
+      "category": "unsupported_assertion",
+      "severity": "medium",
+      "title": "Legal arguments advanced without supporting authority",
+      "description": "The brief states and applies rules of law without citing any case, statute, or regulation in support. Uncited assertions: (1) at III.C: Under the doctrine of assumption of risk, a plaintiff who voluntarily encounters a known danger cannot recover for injuries arising from that danger. (2) at III.D: Harmon reserves the right to challenge the accrual date based on Rivera's own knowledge of his injuries, which the medical records indicate were immediately apparent.",
+      "brief_location": "III.C; III.D",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Under the doctrine of assumption of risk, a plaintiff who voluntarily encounters a known danger cannot recover for injuries arising from that danger."
+        },
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Harmon reserves the right to challenge the accrual date based on Rivera's own knowledge of his injuries, which the medical records indicate were immediately apparent."
+        }
+      ],
+      "source_agent": "CitationExtractor",
+      "confidence": 0.64,
+      "confidence_reasoning": "The quoted sentences themselves contain no citations, but the provided evidence does not show the surrounding brief text, so a nearby supporting citation cannot be mechanically ruled out from the evidence alone. The issue is still plausible because the finding identifies specific uncited legal propositions in legal argument sections.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-3",
+      "category": "fabricated_citation",
+      "severity": "medium",
+      "title": "Cited authority could not be verified: Whitmore v. Delgado Scaffolding Co.",
+      "description": "I do not recognize this case. The citation has concrete suspicious features: the case name and parenthetical are highly tailored to the brief's scaffolding facts, and the parenthetical's 'assumed risks inherent to the trade' phrasing fits the argument unusually neatly. Without database access I cannot confirm it, but these are fabrication signals beyond mere obscurity. Jurisdiction concern: Even if real, a C.D. Cal. federal district court decision would be persuasive only, not binding on a California Superior Court deciding California tort law.",
+      "brief_location": "III.A",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Whitmore v. Delgado Scaffolding Co., 334 F. Supp. 2d 1189, 1195 (C.D. Cal. 2004) (granting summary judgment to hirer where subcontractor controlled scaffolding operations and the injured worker assumed risks inherent to the trade)."
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "confidence": 0.38,
+      "confidence_reasoning": "The evidence shows a complete citation with unusually fact-specific parenthetical language, but the finding expressly rests on lack of recognition and no database confirmation. It is kept because the citation has concrete fabrication signals, but confidence remains low without an external source check.",
+      "duplicate_of": null
+    },
+    {
+      "finding_id": "finding-27",
+      "category": "cross_document_contradiction",
+      "severity": "high",
+      "title": "Brief's March 14 incident date is contradicted by March 12 records",
+      "description": "The accident is repeatedly dated March 12, 2021 in the medical and police records. Rivera's March 12 admission and March 13 surgery also make a March 14 incident date impossible.",
+      "brief_location": "Section III.D, Argument",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "The incident giving rise to this action occurred on March 14, 2021."
+        },
+        {
+          "document": "medical_records_excerpt",
+          "quote": "DATE OF ADMISSION:  March 12, 2021"
+        },
+        {
+          "document": "medical_records_excerpt",
+          "quote": "Patient was brought in by LAFD paramedics following a workplace accident occurring at approximately 10:45 AM on March 12, 2021."
+        },
+        {
+          "document": "police_report",
+          "quote": "Date of Incident:  March 12, 2021"
+        },
+        {
+          "document": "medical_records_excerpt",
+          "quote": "He underwent intramedullary nailing of the left tibial shaft fracture on March 13, 2021."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "confidence": 0.99,
+      "confidence_reasoning": "The motion states a March 14 incident date, while medical and police records repeatedly state March 12 and the medical records show surgery on March 13. This is the same mechanically checkable date defect preserved as finding-16, so this finding is marked duplicate.",
+      "duplicate_of": "finding-16"
+    }
+  ],
+  "could_not_verify": [
+    {
+      "finding_id": "finding-6",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Could not verify authority: Torres v. Granite Falls Dev. Corp.",
+      "description": "I do not recognize 'Torres v. Granite Falls Dev. Corp.' at 198 Cal.App.4th 223. The citation is plausible in format, and there is no deterministic reporter-range signal, but I cannot confirm it from memory.",
+      "brief_location": "Footnote 1",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Torres v. Granite Falls Dev. Corp., 198 Cal.App.4th 223 (2011);"
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-7",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Could not verify authority: Blackwell v. Sunrise Contractors, Inc.",
+      "description": "I do not recognize 'Blackwell v. Sunrise Contractors, Inc.' at 45 Cal.App.4th 1012. The citation format is plausible, but I cannot verify it from known authorities.",
+      "brief_location": "Footnote 1",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Blackwell v. Sunrise Contractors, Inc., 45 Cal.App.4th 1012 (1996);"
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-8",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Could not verify authority: Dixon v. Lone Star Structural, LLC",
+      "description": "I do not recognize 'Dixon v. Lone Star Structural, LLC' at 387 S.W.3d 154. The Texas reporter citation is facially plausible, but I cannot verify the case from memory.",
+      "brief_location": "Footnote 1",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Dixon v. Lone Star Structural, LLC, 387 S.W.3d 154 (Tex. App. 2012);"
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-9",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Could not verify authority: Okafor v. Brightline Builders, Inc.",
+      "description": "I do not recognize 'Okafor v. Brightline Builders, Inc.' at 291 So.3d 614. The Florida citation is facially plausible, but I cannot confirm it from memory.",
+      "brief_location": "Footnote 1",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Okafor v. Brightline Builders, Inc., 291 So.3d 614 (Fla. Dist. Ct. App. 2019);"
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-10",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Could not verify authority: Nguyen v. Allied Pacific Construction Co.",
+      "description": "I do not recognize 'Nguyen v. Allied Pacific Construction Co.' at 112 Cal.App.4th 845. The citation format is plausible, but I cannot verify the case from known California authorities.",
+      "brief_location": "Footnote 1",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Nguyen v. Allied Pacific Construction Co., 112 Cal.App.4th 845 (2003);"
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-11",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Could not verify authority: Reeves v. Summit Engineering Group",
+      "description": "I do not recognize 'Reeves v. Summit Engineering Group' at 78 Cal.App.4th 531. The citation format is plausible, but I cannot verify it from memory.",
+      "brief_location": "Footnote 1",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Reeves v. Summit Engineering Group, 78 Cal.App.4th 531 (2000)."
+        }
+      ],
+      "source_agent": "CitationVerifier",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-13",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Could not verify quotation attributed to Kellerman v. Pacific Coast Construction, Inc.",
+      "description": "I do not genuinely know this case or its language. The citation has red flags: 887 F.2d appears inconsistent with a 1991 Ninth Circuit date, and the quoted OSHA-compliance presumption is not a familiar general federal rule; OSHA compliance is commonly treated as relevant but not necessarily dispositive of negligence. Without reliable knowledge of the authority, I cannot label the quotation fabricated or doctored.",
+      "brief_location": "III.B",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Where an employer demonstrates full compliance with applicable OSHA standards, it is entitled to a rebuttable presumption that it met the standard of care in negligence."
+        }
+      ],
+      "source_agent": "QuoteChecker",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-18",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Outside the case file's coverage: Harmon maintained an active Injury and Illness Prevention Program (\"IIPP\") and h",
+      "description": "The provided documents do not include Harmon's IIPP records or OSHA inspection history. Because this concerns internal safety-program records and inspection histories outside the file's coverage, it cannot be verified from the provided sources.",
+      "brief_location": "Section II, Fact 5",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Harmon maintained an active Injury and Illness Prevention Program (\"IIPP\") and had passed all OSHA inspections conducted at the site during the relevant period, the most recent being February 26, 2021."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-21",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Outside the case file's coverage: Harmon's documented compliance with all applicable OSHA regulations during the r",
+      "description": "The file provided does not contain OSHA compliance documentation or inspection records for Harmon during the relevant period. This is therefore outside what the supplied source documents can verify.",
+      "brief_location": "Section III.B, Argument",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "Harmon's documented compliance with all applicable OSHA regulations during the relevant period creates a rebuttable presumption that it exercised reasonable care with respect to worksite safety."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-25",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Outside the case file's coverage: The risks associated with working at height on scaffolding are inherent to his t",
+      "description": "Whether the risks were well known to Rivera concerns his subjective knowledge and comprehension. The provided documents do not contain Rivera testimony or other evidence establishing his state of mind at the time of the incident.",
+      "brief_location": "Section III.C, Argument",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "The risks associated with working at height on scaffolding are inherent to his trade and were well known to him at the time of the incident."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "backfilled": false
+    },
+    {
+      "finding_id": "finding-26",
+      "category": "could_not_verify",
+      "severity": "low",
+      "title": "Outside the case file's coverage: As a trained professional, Rivera understood the hazards of scaffolding work and",
+      "description": "This claim turns on Rivera's subjective understanding and acceptance of hazards. The supplied records identify his occupation but do not establish his subjective appreciation or voluntary acceptance of the specific risks.",
+      "brief_location": "Section III.C, Argument",
+      "evidence": [
+        {
+          "document": "motion_for_summary_judgment",
+          "quote": "As a trained professional, Rivera understood the hazards of scaffolding work and accepted them as part of his employment."
+        }
+      ],
+      "source_agent": "CrossDocChecker",
+      "backfilled": false
+    }
+  ],
+  "judicial_memo": "Overall, the brief contains several serious factual contradictions and legal-support defects that may affect the reliability of both its factual narrative and dispositive arguments. Most notably, it states in both the Introduction and Fact 3 that the scaffolding incident occurred on March 14, 2021, while the medical and police records place the accident on March 12, 2021; Rivera\u2019s March 13 surgery and March 12 admission make the March 14 date incompatible with the supplied records. The brief also asserts Rivera lacked required PPE, including fall-arrest equipment, but the police report and witness statement say he wore a hard hat and harness and that the lanyard came free because its anchor point was part of the collapsed scaffolding. Its time-bar heading is undermined by the brief\u2019s own calculation that filing was within two years, and the complaint date is unsupported. The Privette quotation appears materially overstated, Seabright is mischaracterized, and two cited authorities could not be verified in available materials.",
+  "stages": [
+    {
+      "name": "CitationExtractor",
+      "state": "ok",
+      "error": null,
+      "duration_ms": 14235,
+      "note": null
+    },
+    {
+      "name": "CitationVerifier",
+      "state": "ok",
+      "error": null,
+      "duration_ms": 65859,
+      "note": null
+    },
+    {
+      "name": "QuoteChecker",
+      "state": "ok",
+      "error": null,
+      "duration_ms": 32563,
+      "note": null
+    },
+    {
+      "name": "CrossDocChecker",
+      "state": "ok",
+      "error": null,
+      "duration_ms": 82389,
+      "note": null
+    },
+    {
+      "name": "DeadlineChecker",
+      "state": "ok",
+      "error": null,
+      "duration_ms": 15,
+      "note": null
+    },
+    {
+      "name": "ConfidenceAdjudicator",
+      "state": "ok",
+      "error": null,
+      "duration_ms": 83844,
+      "note": null
+    },
+    {
+      "name": "JudicialMemoWriter",
+      "state": "ok",
+      "error": null,
+      "duration_ms": 4717,
+      "note": null
+    }
+  ],
+  "citations": [
+    {
+      "citation_id": "cite-1",
+      "kind": "case",
+      "case_name": "Privette v. Superior Court",
+      "full_citation": "Privette v. Superior Court, 5 Cal.4th 689, 695 (1993).",
+      "reporter": "Cal.4th",
+      "volume": 5,
+      "first_page": 689,
+      "pinpoint": "695",
+      "year": 1993,
+      "quoted_text": null,
+      "asserted_proposition": "A hirer of an independent contractor is presumptively not liable for injuries sustained by the contractor's employees while performing the contracted work.",
+      "brief_location": "III.A"
+    },
+    {
+      "citation_id": "cite-2",
+      "kind": "case",
+      "case_name": "Privette v. Superior Court",
+      "full_citation": "Id. at 702.",
+      "reporter": null,
+      "volume": null,
+      "first_page": null,
+      "pinpoint": "702",
+      "year": null,
+      "quoted_text": "A hirer is never liable for injuries sustained by an independent contractor's employees when the injuries arise from the contracted work.",
+      "asserted_proposition": "A hirer is never liable for injuries sustained by an independent contractor's employees when the injuries arise from the contracted work.",
+      "brief_location": "III.A"
+    },
+    {
+      "citation_id": "cite-3",
+      "kind": "case",
+      "case_name": "Whitmore v. Delgado Scaffolding Co.",
+      "full_citation": "Whitmore v. Delgado Scaffolding Co., 334 F. Supp. 2d 1189, 1195 (C.D. Cal. 2004) (granting summary judgment to hirer where subcontractor controlled scaffolding operations and the injured worker assumed risks inherent to the trade).",
+      "reporter": "F. Supp. 2d",
+      "volume": 334,
+      "first_page": 1189,
+      "pinpoint": "1195",
+      "year": 2004,
+      "quoted_text": null,
+      "asserted_proposition": "Summary judgment is appropriate for a hirer where the subcontractor controlled scaffolding operations and the injured worker assumed risks inherent to the trade.",
+      "brief_location": "III.A"
+    },
+    {
+      "citation_id": "cite-4",
+      "kind": "case",
+      "case_name": "Kellerman v. Pacific Coast Construction, Inc.",
+      "full_citation": "Kellerman v. Pacific Coast Construction, Inc., 887 F.2d 1204, 1209 (9th Cir. 1991) (\"Where an employer demonstrates full compliance with applicable OSHA standards, it is entitled to a rebuttable presumption that it met the standard of care in negligence.\").",
+      "reporter": "F.2d",
+      "volume": 887,
+      "first_page": 1204,
+      "pinpoint": "1209",
+      "year": 1991,
+      "quoted_text": "Where an employer demonstrates full compliance with applicable OSHA standards, it is entitled to a rebuttable presumption that it met the standard of care in negligence.",
+      "asserted_proposition": "Full compliance with applicable OSHA standards entitles the employer to a rebuttable presumption that it met the standard of care in negligence.",
+      "brief_location": "III.B"
+    },
+    {
+      "citation_id": "cite-5",
+      "kind": "case",
+      "case_name": "Seabright Insurance Co. v. US Airways, Inc.",
+      "full_citation": "Seabright Insurance Co. v. US Airways, Inc., 52 Cal.4th 590, 598 (2011).",
+      "reporter": "Cal.4th",
+      "volume": 52,
+      "first_page": 590,
+      "pinpoint": "598",
+      "year": 2011,
+      "quoted_text": null,
+      "asserted_proposition": "Compliance with statutory safety requirements is highly probative of the exercise of due care.",
+      "brief_location": "III.B"
+    },
+    {
+      "citation_id": "cite-6",
+      "kind": "statute",
+      "case_name": null,
+      "full_citation": "California Code of Civil Procedure Section 335.1",
+      "reporter": null,
+      "volume": null,
+      "first_page": null,
+      "pinpoint": null,
+      "year": null,
+      "quoted_text": null,
+      "asserted_proposition": "Under California Code of Civil Procedure Section 335.1, the statute of limitations for personal injury claims is two years.",
+      "brief_location": "III.D"
+    },
+    {
+      "citation_id": "cite-7",
+      "kind": "case",
+      "case_name": "Torres v. Granite Falls Dev. Corp.",
+      "full_citation": "Torres v. Granite Falls Dev. Corp., 198 Cal.App.4th 223 (2011);",
+      "reporter": "Cal.App.4th",
+      "volume": 198,
+      "first_page": 223,
+      "pinpoint": null,
+      "year": 2011,
+      "quoted_text": null,
+      "asserted_proposition": "The authority supports the argument regarding the relevance of compliance/safety-related principles referenced in the surrounding OSHA discussion.",
+      "brief_location": "Footnote 1"
+    },
+    {
+      "citation_id": "cite-8",
+      "kind": "case",
+      "case_name": "Blackwell v. Sunrise Contractors, Inc.",
+      "full_citation": "Blackwell v. Sunrise Contractors, Inc., 45 Cal.App.4th 1012 (1996);",
+      "reporter": "Cal.App.4th",
+      "volume": 45,
+      "first_page": 1012,
+      "pinpoint": null,
+      "year": 1996,
+      "quoted_text": null,
+      "asserted_proposition": "The authority supports the argument regarding the relevance of compliance/safety-related principles referenced in the surrounding OSHA discussion.",
+      "brief_location": "Footnote 1"
+    },
+    {
+      "citation_id": "cite-9",
+      "kind": "case",
+      "case_name": "Dixon v. Lone Star Structural, LLC",
+      "full_citation": "Dixon v. Lone Star Structural, LLC, 387 S.W.3d 154 (Tex. App. 2012);",
+      "reporter": "S.W.3d",
+      "volume": 387,
+      "first_page": 154,
+      "pinpoint": null,
+      "year": 2012,
+      "quoted_text": null,
+      "asserted_proposition": "The authority supports the argument regarding the relevance of compliance/safety-related principles referenced in the surrounding OSHA discussion.",
+      "brief_location": "Footnote 1"
+    },
+    {
+      "citation_id": "cite-10",
+      "kind": "case",
+      "case_name": "Okafor v. Brightline Builders, Inc.",
+      "full_citation": "Okafor v. Brightline Builders, Inc., 291 So.3d 614 (Fla. Dist. Ct. App. 2019);",
+      "reporter": "So.3d",
+      "volume": 291,
+      "first_page": 614,
+      "pinpoint": null,
+      "year": 2019,
+      "quoted_text": null,
+      "asserted_proposition": "The authority supports the argument regarding the relevance of compliance/safety-related principles referenced in the surrounding OSHA discussion.",
+      "brief_location": "Footnote 1"
+    },
+    {
+      "citation_id": "cite-11",
+      "kind": "case",
+      "case_name": "Nguyen v. Allied Pacific Construction Co.",
+      "full_citation": "Nguyen v. Allied Pacific Construction Co., 112 Cal.App.4th 845 (2003);",
+      "reporter": "Cal.App.4th",
+      "volume": 112,
+      "first_page": 845,
+      "pinpoint": null,
+      "year": 2003,
+      "quoted_text": null,
+      "asserted_proposition": "The authority supports the argument regarding the relevance of compliance/safety-related principles referenced in the surrounding OSHA discussion.",
+      "brief_location": "Footnote 1"
+    },
+    {
+      "citation_id": "cite-12",
+      "kind": "case",
+      "case_name": "Reeves v. Summit Engineering Group",
+      "full_citation": "Reeves v. Summit Engineering Group, 78 Cal.App.4th 531 (2000).",
+      "reporter": "Cal.App.4th",
+      "volume": 78,
+      "first_page": 531,
+      "pinpoint": null,
+      "year": 2000,
+      "quoted_text": null,
+      "asserted_proposition": "The authority supports the argument regarding the relevance of compliance/safety-related principles referenced in the surrounding OSHA discussion.",
+      "brief_location": "Footnote 1"
+    }
+  ],
+  "citation_verdicts": [
+    {
+      "citation_id": "cite-1",
+      "existence": "real",
+      "existence_reasoning": "I recognize Privette v. Superior Court as a leading California Supreme Court decision reported at 5 Cal.4th 689 in 1993; the reporter, court, year, and page are consistent.",
+      "known_actual_holding": "Privette held that a person who hires an independent contractor is generally not liable under the peculiar-risk doctrine for injuries to the contractor's employees, because workers' compensation covers those injuries and the contractor is responsible for workplace safety. Later California cases describe this as a presumption of delegation/nonliability subject to recognized exceptions.",
+      "support_verdict": "supported",
+      "support_reasoning": "The asserted proposition is a fair statement of the modern Privette doctrine if read as a presumption rather than an absolute bar. The brief should account for exceptions recognized in later cases, including retained control affirmatively contributing to injury, concealed hazardous conditions, and certain nondelegable-duty issues as refined by later California Supreme Court cases.",
+      "jurisdiction_concern": null,
+      "confidence": "high"
+    },
+    {
+      "citation_id": "cite-2",
+      "existence": "real",
+      "existence_reasoning": "This is an id. citation to the real Privette decision discussed in cite-1. I recognize the underlying case, though I do not recognize the quoted absolute language as an accurate quotation from Privette.",
+      "known_actual_holding": "Privette generally bars peculiar-risk tort liability against a hirer for injuries to an independent contractor's employees, based on workers' compensation and delegation of responsibility to the contractor. The doctrine is not an absolute rule that a hirer is never liable in all circumstances.",
+      "support_verdict": "partially_supported",
+      "support_reasoning": "Privette supports a general presumption of hirer nonliability, but the asserted proposition and quoted text are materially overbroad. California law recognizes exceptions, including Hooker-style retained control that affirmatively contributes to injury and Kinsman-style concealed hazards; later decisions also discuss the scope of delegated statutory/regulatory duties. Presenting the doctrine as 'never liable' omits those controlling qualifications.",
+      "jurisdiction_concern": null,
+      "confidence": "high"
+    },
+    {
+      "citation_id": "cite-3",
+      "existence": "likely_fabricated",
+      "existence_reasoning": "I do not recognize this case. The citation has concrete suspicious features: the case name and parenthetical are highly tailored to the brief's scaffolding facts, and the parenthetical's 'assumed risks inherent to the trade' phrasing fits the argument unusually neatly. Without database access I cannot confirm it, but these are fabrication signals beyond mere obscurity.",
+      "known_actual_holding": null,
+      "support_verdict": "could_not_verify",
+      "support_reasoning": "Because I cannot verify that the case exists or know its actual holding, I cannot assess whether it supports the asserted proposition.",
+      "jurisdiction_concern": "Even if real, a C.D. Cal. federal district court decision would be persuasive only, not binding on a California Superior Court deciding California tort law.",
+      "confidence": "low"
+    },
+    {
+      "citation_id": "cite-4",
+      "existence": "likely_fabricated",
+      "existence_reasoning": "I do not recognize this Ninth Circuit case or the quoted OSHA-compliance presumption. There are concrete red flags: 887 F.2d appears to be a late-1980s Federal Reporter volume rather than a 1991 volume, and the quoted rule creating a rebuttable negligence presumption from OSHA compliance is suspiciously broad and not a familiar Ninth Circuit or California negligence rule.",
+      "known_actual_holding": null,
+      "support_verdict": "could_not_verify",
+      "support_reasoning": "Because I cannot verify the authority and the quoted rule appears suspect, I cannot credit it as support for the asserted proposition.",
+      "jurisdiction_concern": "Even if real, a Ninth Circuit decision would not bind a California Superior Court on California negligence-law standards except as persuasive authority, and OSHA compliance would not necessarily control California tort duties.",
+      "confidence": "medium"
+    },
+    {
+      "citation_id": "cite-5",
+      "existence": "real",
+      "existence_reasoning": "I recognize Seabright Insurance Co. v. US Airways, Inc. as a California Supreme Court decision reported at 52 Cal.4th 590 in 2011; the citation details are consistent.",
+      "known_actual_holding": "Seabright held that, under the Privette doctrine, a hirer presumptively delegates to an independent contractor the hirer's tort-law duty to comply with workplace safety requirements, including applicable safety regulations, for the benefit of the contractor's employees. The employee's workers' compensation insurer therefore could not recover from the hirer on that theory.",
+      "support_verdict": "mischaracterized",
+      "support_reasoning": "Seabright is not principally a case about OSHA compliance being 'highly probative' of due care, and it does not hold that an unblemished inspection record insulates a hirer from tort liability. Its actual holding concerns delegation of workplace-safety duties to the independent contractor under Privette. The brief's use also omits that Privette remains a presumption subject to exceptions in appropriate cases.",
+      "jurisdiction_concern": null,
+      "confidence": "high"
+    },
+    {
+      "citation_id": "cite-6",
+      "existence": "real",
+      "existence_reasoning": "California Code of Civil Procedure section 335.1 is a well-known California statute setting a two-year limitations period for personal injury and wrongful-death actions.",
+      "known_actual_holding": "Section 335.1 provides a two-year limitations period for actions for assault, battery, injury to, or death of an individual caused by the wrongful act or neglect of another.",
+      "support_verdict": "supported",
+      "support_reasoning": "The statute supports the asserted proposition that California personal injury claims generally have a two-year limitations period. However, the brief's broader time-bar argument is internally weak on the stated dates: a March 10, 2023 filing for a March 14, 2021 incident is within two years, absent some different accrual theory not apparent from the facts.",
+      "jurisdiction_concern": null,
+      "confidence": "high"
+    },
+    {
+      "citation_id": "cite-7",
+      "existence": "could_not_verify",
+      "existence_reasoning": "I do not recognize 'Torres v. Granite Falls Dev. Corp.' at 198 Cal.App.4th 223. The citation is plausible in format, and there is no deterministic reporter-range signal, but I cannot confirm it from memory.",
+      "known_actual_holding": null,
+      "support_verdict": "could_not_verify",
+      "support_reasoning": "Because I do not know whether the case exists or what it holds, I cannot assess its support for the vague OSHA/compliance-related proposition.",
+      "jurisdiction_concern": null,
+      "confidence": "low"
+    },
+    {
+      "citation_id": "cite-8",
+      "existence": "could_not_verify",
+      "existence_reasoning": "I do not recognize 'Blackwell v. Sunrise Contractors, Inc.' at 45 Cal.App.4th 1012. The citation format is plausible, but I cannot verify it from known authorities.",
+      "known_actual_holding": null,
+      "support_verdict": "could_not_verify",
+      "support_reasoning": "Because I do not know the case or its holding, I cannot determine whether it supports the surrounding OSHA/compliance argument.",
+      "jurisdiction_concern": null,
+      "confidence": "low"
+    },
+    {
+      "citation_id": "cite-9",
+      "existence": "could_not_verify",
+      "existence_reasoning": "I do not recognize 'Dixon v. Lone Star Structural, LLC' at 387 S.W.3d 154. The Texas reporter citation is facially plausible, but I cannot verify the case from memory.",
+      "known_actual_holding": null,
+      "support_verdict": "could_not_verify",
+      "support_reasoning": "Because I cannot verify the case or its actual holding, I cannot assess whether it supports the cited OSHA/compliance proposition.",
+      "jurisdiction_concern": "A Texas intermediate appellate decision would be nonbinding and of limited persuasive value in a California Superior Court applying California tort and Privette doctrine.",
+      "confidence": "low"
+    },
+    {
+      "citation_id": "cite-10",
+      "existence": "could_not_verify",
+      "existence_reasoning": "I do not recognize 'Okafor v. Brightline Builders, Inc.' at 291 So.3d 614. The Florida citation is facially plausible, but I cannot confirm it from memory.",
+      "known_actual_holding": null,
+      "support_verdict": "could_not_verify",
+      "support_reasoning": "Because I cannot verify the authority or its holding, I cannot assess support for the asserted OSHA/compliance-related proposition.",
+      "jurisdiction_concern": "A Florida District Court of Appeal decision would be nonbinding and of limited persuasive value in a California Superior Court applying California law.",
+      "confidence": "low"
+    },
+    {
+      "citation_id": "cite-11",
+      "existence": "could_not_verify",
+      "existence_reasoning": "I do not recognize 'Nguyen v. Allied Pacific Construction Co.' at 112 Cal.App.4th 845. The citation format is plausible, but I cannot verify the case from known California authorities.",
+      "known_actual_holding": null,
+      "support_verdict": "could_not_verify",
+      "support_reasoning": "Because I do not know whether this case exists or what it holds, I cannot assess its support for the surrounding OSHA/compliance argument.",
+      "jurisdiction_concern": null,
+      "confidence": "low"
+    },
+    {
+      "citation_id": "cite-12",
+      "existence": "could_not_verify",
+      "existence_reasoning": "I do not recognize 'Reeves v. Summit Engineering Group' at 78 Cal.App.4th 531. The citation format is plausible, but I cannot verify it from memory.",
+      "known_actual_holding": null,
+      "support_verdict": "could_not_verify",
+      "support_reasoning": "Because I cannot verify the case or its holding, I cannot assess whether it supports the cited OSHA/compliance proposition.",
+      "jurisdiction_concern": null,
+      "confidence": "low"
+    }
+  ],
+  "dropped_ungrounded": 0,
+  "model_fast": "gpt-5.4-nano",
+  "model_reasoning": "gpt-5.5"
+}
