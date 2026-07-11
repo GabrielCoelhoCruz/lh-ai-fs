@@ -2,6 +2,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from orchestrator import BRIEF_NAME, run_pipeline
 
@@ -34,4 +35,7 @@ def analyze():
             status_code=500, detail=f"{BRIEF_NAME}.txt not found in documents/"
         )
     report = run_pipeline(documents)
-    return {"report": report.model_dump()}
+    body = {"report": report.model_dump()}
+    if report.pipeline_status == "failed":
+        return JSONResponse(status_code=503, content=body)
+    return body

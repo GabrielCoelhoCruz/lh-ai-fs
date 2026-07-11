@@ -26,3 +26,7 @@ docs/plans/
 .internal/
 
 .omc/
+
+# LLM record/replay cache (dev only; never commit)
+backend/evals/llm-cache/
+backend/evals/live-eval-log.txt

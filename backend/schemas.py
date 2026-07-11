@@ -144,6 +144,7 @@ class Finding(BaseModel):
     brief_location: str
     evidence: list[EvidenceQuote]
     source_agent: str
+    backfilled: bool = False
 
 
 class AdjudicatedFinding(BaseModel):
@@ -185,14 +186,22 @@ class StageStatus(BaseModel):
     state: StageState
     error: str | None
     duration_ms: int
+    note: str | None = None  # non-fatal assembly warnings on ok stages
+
+
+PipelineStatus = Literal["complete", "partial", "failed"]
 
 
 class VerificationReport(BaseModel):
     case_caption: str
     document_analyzed: str
+    pipeline_status: PipelineStatus = "complete"
     findings: list[AdjudicatedFinding]
     could_not_verify: list[Finding]
     judicial_memo: str | None
     stages: list[StageStatus]
+    citations: list[ExtractedCitation] | None = None
+    citation_verdicts: list[CitationVerdict] | None = None
+    dropped_ungrounded: int = 0
     model_fast: str
     model_reasoning: str

@@ -50,5 +50,5 @@ def check_facts(
         user=user,
         response_model=CrossDocCheck,
         model=MODEL_REASONING,
-        effort="high",
+        effort="medium",
     )

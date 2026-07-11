@@ -98,5 +98,5 @@ def verify_citations(
         user=user,
         response_model=CitationVerification,
         model=MODEL_REASONING,
-        effort="high",
+        effort="medium",
     )

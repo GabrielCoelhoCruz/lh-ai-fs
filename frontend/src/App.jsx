@@ -146,9 +146,14 @@ function App() {
     setReport(null)
     try {
       const response = await fetch('http://localhost:8002/analyze', { method: 'POST' })
-      if (!response.ok) throw new Error(`Server responded with ${response.status}`)
       const data = await response.json()
-      setReport(data.report)
+      if (data.report) setReport(data.report)
+      if (!response.ok) {
+        const status = data.report?.pipeline_status ?? 'failed'
+        throw new Error(
+          `Pipeline ${status} (HTTP ${response.status}). Core stages may have failed — see stage status below.`
+        )
+      }
     } catch (err) {
       setError(err.message)
     } finally {
@@ -191,7 +196,20 @@ function App() {
         </div>
       )}
 
-      {report && (
+      {report && error && report.stages?.length > 0 && (
+        <div style={{ marginTop: '16px', borderTop: '1px solid #e5e7eb', paddingTop: '12px' }}>
+          <div style={{ fontSize: '12px', color: '#6b7280', display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
+            {report.stages.map((s) => (
+              <span key={s.name} title={s.error ?? s.note ?? ''}>
+                <span style={{ color: STAGE_COLORS[s.state] }}>●</span> {s.name}{' '}
+                {s.state === 'ok' ? `${(s.duration_ms / 1000).toFixed(1)}s` : s.state}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {report && !error && (
         <div style={{ marginTop: '28px' }}>
           {report.judicial_memo && (
             <div
@@ -256,7 +274,7 @@ function App() {
           <div style={{ marginTop: '28px', borderTop: '1px solid #e5e7eb', paddingTop: '12px' }}>
             <div style={{ fontSize: '12px', color: '#6b7280', display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
               {report.stages.map((s) => (
-                <span key={s.name} title={s.error ?? ''}>
+                <span key={s.name} title={s.error ?? s.note ?? ''}>
                   <span style={{ color: STAGE_COLORS[s.state] }}>●</span> {s.name}{' '}
                   {s.state === 'ok' ? `${(s.duration_ms / 1000).toFixed(1)}s` : s.state}
                 </span>
