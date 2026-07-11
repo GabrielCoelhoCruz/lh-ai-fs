@@ -20,8 +20,8 @@ For each claim, return:
 3. status — one of:
    - "consistent": source documents affirmatively corroborate the claim.
    - "contradicted": at least one source document states something incompatible with the claim.
-   - "unsupported": the brief asserts the claim as established fact, but no source document provides any basis for it (e.g. a specific tenure or qualification no document mentions).
-   - "could_not_verify": the claim concerns something outside what these documents could show (e.g. internal company programs, inspection histories not in the file). This is a statement about the file's coverage, not a flaw.
+   - "unsupported": the brief asserts a material, record-checkable factual claim as established fact, but no source document provides any basis for it (e.g. a specific tenure or qualification no document mentions). Do not use "unsupported" for subjective state-of-mind, comprehension, or acceptance boilerplate about the plaintiff (e.g. that risks "were well known to him" or that he "accepted them") — those belong in "could_not_verify".
+   - "could_not_verify": the claim concerns something outside what these documents could show (e.g. internal company programs, inspection histories not in the file, or subjective state-of-mind/comprehension/acceptance boilerplate). This is a statement about the file's coverage, not a flaw.
 4. evidence — for "consistent" and "contradicted", VERBATIM quotes from the source documents, each tagged with the document it came from. Copy the exact words — these quotes are checked mechanically against the source text, and a quote that does not appear in the document invalidates the finding. For "unsupported" and "could_not_verify", evidence may be empty.
 5. reasoning — one to three sentences. For dates, do the arithmetic explicitly. For contradictions, state exactly which words conflict.
 6. confidence — "high" when the documents speak directly; "medium"/"low" when inference is required.

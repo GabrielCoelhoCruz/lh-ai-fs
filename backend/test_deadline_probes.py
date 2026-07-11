@@ -5,8 +5,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from assembly import BRIEF_NAME, filter_ungrounded
+from assembly import BRIEF_NAME, assemble, filter_ungrounded
 from deadline_check import check_deadline
+from schemas import CitationExtraction, UncitedLegalAssertion
 
 DOCS_DIR = Path(__file__).parent / "documents"
 REAL_BRIEF = (DOCS_DIR / "motion_for_summary_judgment.txt").read_text(
@@ -95,12 +96,70 @@ def test_real_brief_finding_survives_filter_ungrounded():
     assert kept[0].category == "misleading_framing"
 
 
+def test_assemble_merges_multiple_uncited_assertions():
+    texts = [
+        "Assumption of risk bars recovery for known scaffolding hazards.",
+        "A trained professional accepts inherent trade risks.",
+        "Voluntary encounter of a known danger precludes recovery.",
+    ]
+    citations = CitationExtraction(
+        citations=[],
+        uncited_legal_assertions=[
+            UncitedLegalAssertion(
+                assertion_id=f"u{i}",
+                text=t,
+                brief_location=f"Section III.C, paragraph {i}",
+            )
+            for i, t in enumerate(texts, start=1)
+        ],
+    )
+    findings, _cnv, _notes = assemble(citations, None, None, None)
+    uncited_findings = [
+        f for f in findings if f.source_agent == "CitationExtractor"
+    ]
+    assert len(uncited_findings) == 1
+    merged = uncited_findings[0]
+    assert merged.category == "unsupported_assertion"
+    assert len(merged.evidence) == 3
+    for t, eq in zip(texts, merged.evidence):
+        assert eq.quote == t
+        assert eq.document == BRIEF_NAME
+    for t in texts:
+        assert t in merged.description
+
+
+def test_assemble_single_uncited_assertion_unchanged():
+    text = "Assumption of risk bars recovery for known scaffolding hazards."
+    citations = CitationExtraction(
+        citations=[],
+        uncited_legal_assertions=[
+            UncitedLegalAssertion(
+                assertion_id="u1",
+                text=text,
+                brief_location="Section III.C",
+            )
+        ],
+    )
+    findings, _cnv, _notes = assemble(citations, None, None, None)
+    uncited_findings = [
+        f for f in findings if f.source_agent == "CitationExtractor"
+    ]
+    assert len(uncited_findings) == 1
+    f = uncited_findings[0]
+    assert f.brief_location == "Section III.C"
+    assert len(f.evidence) == 1
+    assert f.evidence[0].quote == text
+    assert "Uncited assertions:" not in f.description
+
+
 def main() -> int:
     test_timely_but_time_barred_emits_misleading_framing()
     test_genuinely_late_filing_returns_none()
     test_missing_dates_returns_none()
     test_real_brief_finding_survives_filter_ungrounded()
-    print("All deadline probe tests passed.")
+    test_assemble_merges_multiple_uncited_assertions()
+    test_assemble_single_uncited_assertion_unchanged()
+    print("All deadline/merge probe tests passed.")
     return 0
 
 

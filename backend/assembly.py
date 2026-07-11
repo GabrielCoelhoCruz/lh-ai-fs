@@ -81,7 +81,9 @@ def assemble(
     by_id = {c.citation_id: c for c in citations.citations} if citations else {}
 
     if citations:
-        for a in citations.uncited_legal_assertions:
+        uncited = citations.uncited_legal_assertions
+        if len(uncited) == 1:
+            a = uncited[0]
             findings.append(
                 make(
                     "unsupported_assertion",
@@ -91,6 +93,28 @@ def assemble(
                     "any case, statute, or regulation in support.",
                     a.brief_location,
                     [EvidenceQuote(document=BRIEF_NAME, quote=a.text)],
+                    "CitationExtractor",
+                )
+            )
+        elif len(uncited) > 1:
+            locations = "; ".join(a.brief_location for a in uncited)
+            enumerated = " ".join(
+                f"({i}) at {a.brief_location}: {a.text}"
+                for i, a in enumerate(uncited, start=1)
+            )
+            findings.append(
+                make(
+                    "unsupported_assertion",
+                    "medium",
+                    "Legal argument advanced without any supporting authority",
+                    "The brief states and applies rules of law without citing "
+                    "any case, statute, or regulation in support. Uncited "
+                    f"assertions: {enumerated}",
+                    locations,
+                    [
+                        EvidenceQuote(document=BRIEF_NAME, quote=a.text)
+                        for a in uncited
+                    ],
                     "CitationExtractor",
                 )
             )
